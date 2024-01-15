@@ -1,0 +1,203 @@
+{
+  "Wlcome": "Hello World",
+  "login": "Log in",
+  "Signup": "Sign up",
+  "signup_screen": {
+    "signup_welcome": "Hello there \uD83D\uDC4B",
+    "msg": "Please enter your email & password \nto create an account.",
+    "email": "Email address",
+    "hint_email": "Email",
+    "password": "password",
+    "password_hint": "password",
+    "policy": "I agree to Qubiko AI Public Agreement, Terms, & Privacy Policy.",
+    "ask_about_login": "Already have an account?",
+    "login":"Log in",
+    "continuewith": "or continue with",
+    "continue": "continue"
+
+  },
+  "Profile_Screen": {
+    "title": "Complete your profile ",
+    "hint": "Please enter your profile. Don't worry, only you can see your personal data. No one else will be able to see it. Or you can skip it for now.",
+    "name_hint": "Full Name",
+    "phone_hint": "Phone Number",
+    "gender_hint": "Gender",
+    "camera_taken": "Camera",
+    "studio_taken": "Gallery",
+    "crop_title": "Crop image",
+    "success_msg": "Sign up Successful!",
+    "hint_suc_msg": "Please wait...\nSaving User Data Information."
+  },
+  "Login_screen": {
+    "signup_welcome": "Welcome back \uD83D\uDC4B",
+    "msg": "Please enter your email & password to log in.",
+    "email": "Email address",
+    "hint_email": "Email",
+    "password": "password",
+    "password_hint": "password",
+    "ask_about_pass": "Forgot password?",
+    "remember": "Remember me.",
+    "ask_about_signup": "Don’t have an account?",
+    "signup":"Sign up",
+    "continuewith": "or continue with",
+    "continue": "Log in",
+    "success_msg": "Log in Successful!",
+    "hint_suc_msg": "Please wait...\nYou will be directed to the homepage."
+  },
+  "Writing": {
+    "title1":"Write an Articles",
+    "hint1":"Generate well-written articles on any topic you want.",
+    "serchtitle1":"Write an article about ",
+
+    "title2":"Summarize (TL;DR)",
+    "hint2":"Extract key points from long texts.",
+    "serchtitle2":"Write an summarize about "
+  },
+  "Creative": {
+    "title1":"Storyteller",
+    "hint1":"Generate stories from any given topic.",
+    "serchtitle1":"tell me an story about ",
+    "title2":"Poems",
+    "hint2":"Generate poems in different styles.",
+    "serchtitle2":"tell me an poem about "
+  },
+  "Business": {
+    "title1":"Email Writer",
+    "hint1":"Generate templates for emails, letters, etc.",
+    "serchtitle1":"Write an article about ",
+    "title2":"Answer Interviewer",
+    "hint2":"Generate answers to interview questions.",
+    "serchtitle2":"Write an interview answers about "
+  },
+  "Social Media": {
+    "title1":"LinkedIn",
+    "hint1":"Create attention-grabbing posts on LinkedIn.",
+    "serchtitle1":"Write an posts on LinkedIn about ",
+    "title2":"Instagram",
+    "hint2":"Write captions that attract audience on Instagram.",
+    "serchtitle2":"Write captions on Instagram about "
+  },
+  "Developer": {
+    "title1":"Write Code",
+    "hint1":"Write app & websites in any programming language.",
+    "serchtitle1":"Write code about ",
+    "title2":"Explain Code",
+    "hint2":"Explain complicated programming code snippets.",
+    "serchtitle1":"Explain this Code "
+  },
+  "Personal": {
+    "title1":"Birthday",
+    "hint1":"Create sincere birthday wishes for loved ones.",
+    "serchtitle1":"Create sincere birthday wishes for ",
+
+    "title2":"Apology",
+
+    "hint2":"Make an apology for the mistakes that have been made.",
+    "serchtitle2":"Make an apology for "
+  },
+  "Others": {
+    "title1":"Create Conversation",
+    "hint1":"Create conversation templates for two or more people.",
+    "serchtitle1":"Create conversation templates for ",
+    "title2":"Tell a Joke",
+    "hint2":"Write funny jokes to tell your friends and make them laugh.",
+    "serchtitle2":"Tell me a joke about "
+  },
+  "createchat": {
+    "title": "Welcome to\nQubiko AI \uD83D\uDC4B",
+    "hint": "Start chatting with ChattyAI now.\nYou can ask me anything.",
+    "buttontitle": "Start Chat"
+  },
+  "chatscreen": {
+    "title1": "What's in your mind?",
+    "title2": "Answer all your questions.\n(Just ask me anything you like!)",
+    "title3": "Generate all the text you want.\n(essays, articles, reports, stories, & more)",
+    "tfieldhint": "Type Your Message..."
+  },
+  "searchscreen": {
+    "foundtitle":"Not Found",
+    "foundhint":"We're sorry, the keyword you were looking for could not be found. Please search with another keywords.",
+    "prv_title": "previous Search",
+    "search_hint": "Search",
+    "search_result": "Search Result:"
+  },
+  "mainaccount": {
+    "screentitle": "Account",
+    "protitle": "Upgrade to PRO!",
+    "profilehint": "Enjoy all benefits without restrictions",
+    "item1": "Personal Info",
+    "item2": "Security",
+    "item3": "Language",
+    "item4": "Help Center",
+    "item5": "Privacy Policy",
+    "item6": "About",
+    "item7": "Logout",
+    "genralitems": "General",
+    "about": "About",
+    "General": "General"
+  },
+  "ReviewSummary": {
+    "title": "Review Summary",
+    "subtitle": "Subscription",
+    "subval": "1 month",
+    "amount": "Amount",
+    "amountval": "$ 10.00",
+    "tax": "Tax",
+    "taxval": "$ 12",
+    "total": "Total Amount",
+    "totalval": "$ 12",
+    "bottomtitle": "Confirm Payment",
+    "paymentmethod": "Selected Payment Method",
+    "cahngemethod": "Change",
+    "proplantitle": "Welcome to Pro Plan!",
+    "hintproplan": "You have successfully subscribed to Pro! E-Receipt has been sent to your email address. Enjoy the benefits!",
+    "probutton": "ok"
+
+
+  },
+
+  "proplan": {
+    "sctitle": "Upgrade to PRO!",
+    "currentplan": "Your current plan",
+    "buttontitle": "Select plan",
+    "price0": "0",
+    "freetitle": "Free",
+    "price1": "10",
+    "price2": "40",
+    "price3": "70",
+    "description0":"free version",
+    "description1":"Go Pro, & enjoy all benefits",
+    "description2":"Enjoy all benefits, (save over 30%)",
+    "description3":"Enjoy all benefits (save over 40%)",
+    "duration1": "1 month",
+    "duration2": "6 months",
+    "duration3": "12 months",
+    "freefeatures": "Only available when demand is low,Slow response speed,New feature updates are slower",
+    "paidfeatures": "Always available in any demand,Fast response speed,Priority access to new features,Advanced analytics,Dedicated support"
+
+  },
+
+  "personalscreen": {
+    "scname": "Personal Info",
+    "nametext": "Name",
+    "phone": "Phone Number",
+    "dateofbirth": "Date of Birth"
+  },
+
+  "securityscreen": {
+    "sctitle": "Security",
+    "item0": "Remember me",
+    "item1": "Biometric ID",
+    "item2": "Face ID",
+    "item3": "SMS Authenticator",
+    "item4": "Google Authenticator",
+    "chpass": "Change Password"
+  },
+  "otpsc":{
+    "title": "OTP code verification \uD83D\uDD10",
+    "hint": "We have sent an OTP code to your Phone number. Enter the OTP code below to verify.",
+    "check": "Didn't receive message?",
+    "hintcheck": "You can resend code in",
+    "timecode": "s"
+  }
+}
