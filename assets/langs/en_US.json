@@ -199,5 +199,79 @@
     "check": "Didn't receive message?",
     "hintcheck": "You can resend code in",
     "timecode": "s"
+  },
+  "helpcenter": {
+    "mainsctitle": "Help Center",
+    "sctitle1": "FAQ",
+    "sctitle2": "Contact us"
+
+  },
+  "faqsc": {
+    "q1": "What is Qubiko AI?",
+    "ans1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "q2": "Is the Qubiko AI App free?",
+    "ans2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "q3": "How can I use Qubiko AI",
+    "ans3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "q4": "How can I log out from Qubiko AI?",
+    "ans4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "q5":"How to close Qubiko AI account?",
+    "ans5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+  "contactus": {
+    "title0": "WhatsApp",
+    "title1": "Instagram",
+    "title2": "Facebook",
+    "title3": "Twitter",
+    "title4": "Website"
+
+  },
+  "privacysc": {
+    "sctitle": "Privacy & Policy",
+    "txt0": "At Qubiko AI, we respect and protect the privacy of our users. This Privacy Policy outlines the types of personal information we collect, how we use it, and how we protect your information.",
+    "title1": "Information We Collect",
+    "txt1": "When you use our app, we may collect the following types of personal information:\nDevice Information: We may collect information about the type of device you use, its operating system, and other technical details to help us improve our app.\nUsage Information: We may collect information about how you use our app, such as which features you use and how often you use them.\nPersonal Information: We may collect personal information, such as your name, email address, or phone number, if you choose to provide it to us.",
+    "title2": "How We Use Your Information",
+    "txt2": "We use your information for the following purposes:\nTo provide and improve our app: We use your information to provide and improve our app, including to personalize your experience and to analyze how our app is used.\nTo communicate with you: We may use your information to communicate with you about our app, including to provide you with updates and news about our app.\nTo protect our rights and the rights of others: We may use your information to protect our rights and the rights of others, such as to investigate and prevent fraud or other illegal activity."
+  },
+
+  "aboutsc": {
+    "sctitle": "About Qubiko AI",
+    "title0": "Job Vacancy",
+    "title1": "Developer",
+    "title2": "Partner",
+    "title3": "Accessibility",
+    "title4": "Terms of Use",
+    "title5": "Feedback",
+    "title6": "Rate us",
+    "title7": "Visit Our Website",
+    "title8": "Follow us on Social Media"
+  },
+
+  "languagesc": {
+    "sctitle": "Language",
+    "lang": "English (US)"
+
+  },
+
+  "historysc": {
+    "sctitle":"History",
+    "emptyhint": "You have no history."
+  },
+
+
+  "snackbarmsg": {
+    "mailchpass": "Check your email to reset password."
+
+  },
+
+  "logout": {
+    "sctitle": "logout",
+    "msg": "Are you sure you want to log out?",
+    "logout": "Yes, Logout",
+    "cancel": "Cancel"
   }
+
+
+
 }

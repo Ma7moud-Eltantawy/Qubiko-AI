@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:quickai/Features/Auth/profile_screen/controller/profile_controller.dart';
 import 'package:quickai/Features/Splash_Screen/view/Splash_screen_view.dart';
 import 'package:quickai/Features/on_boarding/view/on_boarding_screen.dart';
@@ -59,7 +60,7 @@ class PersonalinfoScreen extends StatelessWidget {
                 child: Form(
                   key: con.formKey,
                   child: Column(
-                    crossAxisAlignment: crossAlignment,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
 
@@ -73,7 +74,46 @@ class PersonalinfoScreen extends StatelessWidget {
                             child: Card(
                               shape: const CircleBorder(),
                               color: ColorsManager.burble.withOpacity(.2),
-                              child:Container(
+                              child:con.imgfile == null?
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: ColorsManager.burble.withOpacity(.3), width: width / 200),
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: currentuserdata!.pic.toString(),
+                                  placeholder: (context, url) => Center(
+                                    child: CircularProgressIndicator(
+                                      color: ColorsManager.burble,
+                                      strokeWidth: Get.width / 200,
+                                    ),
+                                  ),
+                                  errorWidget: (context, url, error) => Container(
+                                    padding: EdgeInsets.all(Get.width / 120),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(width: Get.width / 300, color: ColorsManager.burble),
+                                    ),
+                                    child: Icon(
+                                      Icons.error,
+                                      color: ColorsManager.burble,
+                                    ),
+                                  ),
+                                  imageBuilder: (context, imageProvider) => Container(
+                                    height: Get.height/7,
+                                    width: Get.width/4,
+                                    decoration: BoxDecoration(
+
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),),
+                              )
+
+                                  :Container(
                                 decoration: BoxDecoration(
                                   image: con.imgfile == null
                                       ? const DecorationImage(
@@ -162,15 +202,15 @@ class PersonalinfoScreen extends StatelessWidget {
 
                       Text(loc.translate('personalscreen','nametext')),
                       SizedBox(height: height/80,),
-                      text_feild(controller: con.namecon, width: width, heigh: height, hintString:loc.translate("Profile_Screen", "name_hint"),icon:Icon(Icons.person), texttype: TextInputType.text, password: false, seen_pass: false, readonly: !con.editstate,),
+                      text_feild(controller: con.namecon, width: width, heigh: height, hintString:currentuserdata!.name!,icon:Icon(Icons.person), texttype: TextInputType.text, password: false, seen_pass: false, readonly: !con.editstate,),
                       SizedBox(height: height/40,),
                       Text(loc.translate('personalscreen','phone')),
                       SizedBox(height: height/80,),
-                      text_feild(controller: con.namecon, width: width, heigh: height, hintString:loc.translate("Profile_Screen", "phone_hint"),icon: Icon(Icons.phone), texttype: TextInputType.phone, password: false, seen_pass: false,readonly: !con.editstate,),
+                      text_feild(controller: con.phonecon, width: width, heigh: height, hintString:currentuserdata!.phone!,icon: Icon(Icons.phone), texttype: TextInputType.phone, password: false, seen_pass: false,readonly: !con.editstate,),
                       SizedBox(height: height/40,),
                       Text(loc.translate('personalscreen','dateofbirth')),
                       SizedBox(height: height/80,),
-                      datepickerfield(controller: con.datecon, width: width, heigh: height, hintString:loc.translate('personalscreen','dateofbirth'),icon:Icons.date_range, texttype: TextInputType.phone, password: false, seen_pass: false,readonly: true, onpress: (){
+                      datepickerfield(controller: con.datecon, width: width, heigh: height, hintString:currentuserdata!.DateofBirth!,icon:Icons.date_range, texttype: TextInputType.phone, password: false, seen_pass: false,readonly: true, onpress: (){
                         con.datapicker(context);
                       },),
 

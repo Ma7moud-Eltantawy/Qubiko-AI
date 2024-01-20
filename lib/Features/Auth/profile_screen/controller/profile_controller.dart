@@ -67,7 +67,10 @@ class Profile_controller extends GetxController{
             Premiun: false,
             premuimtodate: "",
             Premuimplan: PaymentPLAN.free.toString(),
-            DateofBirth: datecon.text));
+            DateofBirth: datecon.text,
+          email: signupcontroller.emailcon.text,
+
+        ));
         await _baseAuthDataSource.Verifyaccount(ctx: Get.context!);
         changeprogresshudValue();
         Get.offAll(()=>Welcome_Screen(),transition: kTransition2,duration: kTransitionDuration);

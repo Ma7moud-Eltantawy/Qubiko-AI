@@ -16,9 +16,13 @@ abstract class BaseDBhelperdatasource {
 
   Future<void>SaveuserinDB({required Userdatamodel user});
   Future<RequestResult<Userdatamodel>>getuserfromDB();
-  Future<void>cleanDB();
+  Future<void>removeuserdata();
   Future<RequestResult>OnBoardingseen();
   Future<RequestResult<Onboardseenenum>>OnBoardingseencheck();
+  Future<void>SavelanginDB({required String lang});
+  Future<RequestResult<String>>getlangfromDB();
+
+
 
 
 
@@ -46,10 +50,11 @@ class RemoteDBhelperdatasource implements BaseDBhelperdatasource{
 
 
   @override
-  Future<void> cleanDB() async {
+  Future<void> removeuserdata() async {
     try{
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.remove('userdata');
+      currentuserdata=null;
     }
     catch(e)
     {
@@ -104,6 +109,31 @@ class RemoteDBhelperdatasource implements BaseDBhelperdatasource{
     {
       return RequestResult(requestState: RequestState.success,data: onboardstate);
 
+    }
+  }
+
+  @override
+  Future<void> SavelanginDB({required String lang}) async {
+    try{
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('lang',lang);
+    }
+    catch(e)
+    {
+      print(e);
+    }
+  }
+
+  @override
+  Future<RequestResult<String>> getlangfromDB() async {
+    try{
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? langdata=await prefs.getString('lang');
+      return RequestResult(requestState: RequestState.success,data:langdata);
+    }
+    catch(e)
+    {
+      return RequestResult(requestState: RequestState.failed);
     }
   }
 

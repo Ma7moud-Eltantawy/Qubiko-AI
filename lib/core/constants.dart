@@ -22,8 +22,6 @@ var height=Get.height;
 Transition kTransition1 = Transition.fadeIn;
 Transition kTransition2 = Transition.rightToLeftWithFade;
 TextDirection textdirection=TextDirection.LTR;
-Alignment alignment=Alignment.centerLeft;
-CrossAxisAlignment crossAlignment=CrossAxisAlignment.start;
 const String Publishablekey="pk_test_51ORCNgGSYqhTIfqxubEIP2ffwOtiAFjntYUXIi1RrWx6ppmgF1SCtCMmGUcmuTRkivT7VEH3XGeS0Nnx61tIlzLo00lksrnLSb";
 const String Secretkey ="sk_test_51ORCNgGSYqhTIfqx7YEfcEvXO3SWy0wCDjLneB40oPvcfH3GX0xe5HrrsJQfTfExxkx0xzl7xWmOGHpmVMj9RoCK00WiCwONu1";
 void showsnackbar({required String content}) {

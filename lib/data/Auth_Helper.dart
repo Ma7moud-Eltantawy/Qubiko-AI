@@ -36,6 +36,10 @@ abstract class BaseAuthDataSource{
   Future<RequestResult<Userdatamodel>>Getuserdata({required String id});
   Future<RequestResult<RequestState>>uploaduserdata({required Userdatamodel user});
   Future<RequestResult<String>>Uploadimgtostorage({required XFile img});
+  Future<void> sendPasswordResetEmail({required String email});
+
+
+
   Future<void> logout();
 }
 
@@ -99,12 +103,13 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
 
   @override
   Future<void> logout() async{
-    await FirebaseAuth.instance.signOut();
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('userdata');
-    //currentuserdata=null;
-    //currentusermoreinfo=null;
-
+    try {
+      await FirebaseAuth.instance.signOut();
+    }
+    catch(e)
+    {
+      print(e);
+    }
   }
 
   @override
@@ -283,7 +288,19 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
       return RequestResult(requestState: RequestState.failed);
     }
   }
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: email,
+      );
 
+      print('Password reset email sent to $email');
+      // You can inform the user that the password reset email has been sent
+    } catch (e) {
+      print('Error sending password reset email: $e');
+      // Handle the error appropriately, e.g., show a message to the user
+    }
+  }
 
 
 

@@ -56,7 +56,7 @@ class Login_screen extends StatelessWidget {
                     child: Form(
                       key: con.loginformKey,
                       child: Column(
-                        crossAxisAlignment: crossAlignment,
+                        crossAxisAlignment: CrossAxisAlignment.start,
 
                         children: [
                           Text(loc.translate('Login_screen','signup_welcome'),style: TextStyle(
@@ -82,7 +82,10 @@ class Login_screen extends StatelessWidget {
 
                           Text(loc.translate('Login_screen','password')),
                           SizedBox(height: height/80,),
-                          text_feild(controller: con.passcon, width: width,heigh: height,hintString: loc.translate('signup_screen','password'), icon: Icon(Icons.visibility),password: true,seen_pass: true, texttype: TextInputType.text,readonly: false,),
+                          text_feild(controller: con.passcon, width: width,heigh: height,hintString: loc.translate('signup_screen','password'), icon: GestureDetector(child:con.check_seen?Icon(Icons.visibility):Icon(Icons.visibility_off),onTap:(){
+                            con.checkpassseen();
+                            print(con.check_seen);
+                          } ,),password: true,seen_pass: true, texttype: TextInputType.text,readonly: false,),
                           SizedBox(height: height/30,),
 
                           Row(
@@ -205,8 +208,8 @@ class Login_screen extends StatelessWidget {
             child: materialbutton(height: height, width: width,colors: [ColorsManager.burble,ColorsManager.purble2],onpress: (){
 
 
-              if (con.loginformKey.currentState!.validate()) {
-                con.login(ctx: context, heidht: height, width: width);
+              if (con.loginformKey.currentState!.validate() && con.check_active) {
+                con.login(ctx: context, height: height, width: width);
               }
 
             },text:loc.translate('Login_screen','continue'),textcolor: ColorsManager.white,),

@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:quickai/data/DB_Helper.dart';
 
 class Login_controller extends GetxController{
+  bool check_seen=true;
   final BaseAuthDataSource _remmoteDataSource = AuthRemoteDataSource();
   final BaseDBhelperdatasource _dBhelperdatasource=RemoteDBhelperdatasource();
   TextEditingController emailcon=TextEditingController();
@@ -41,52 +42,63 @@ class Login_controller extends GetxController{
     Get.offAll(()=>Home_screen(),transition: kTransition2,duration: kTransitionDuration);
   }
 
-  Future login({required BuildContext ctx,required double heidht, required double width}) async {
-    changeLoadingValue();
-    RequestResult<UserCredential> ? result;
-
-    _remmoteDataSource.checkEmailVerified().then((checkresult) async {
-      print(checkresult.data);
-      if (checkresult.data == verifiedenum.Verify) {
-        result = await _remmoteDataSource.login(
-          email: emailcon.text.trim(),
-          pass: passcon.text,
-        );
-
-
-        Future.delayed(Duration(seconds: 5));
-        changeLoadingValue();
-        print(result!.data);
-        if (result!.data == null) {
-          return;
-        };
-        changeprogresshudValue();
-        if (result!.requestState == RequestState.success) {
-          if (result!.data!.user != null) {
-            await _remmoteDataSource.Getuserdata(id: result!.data!.user!.uid)
-                .then((userdata) async {
-              await _dBhelperdatasource.SaveuserinDB(user: userdata.data!);
-              await _dBhelperdatasource.getuserfromDB().then((value) async {
-                print(value.requestState);
-                if (value.requestState == RequestState.success) {
-                  changeprogresshudValue();
-                  Navigator();
-                }
-              });
-            });
-          }
-        } else if (result!.requestState == RequestState.failed) {
-          // Fail_toast(ctx: ctx, title: "login failed", height: heidht, width: width, desc: "email or password is incorrect");
-
-        }
+  Future login({required BuildContext ctx, required double height, required double width}) async {
+    try {
+      // Assuming _remmoteDataSource is an instance of your data source class
+      final loginResult = await _remmoteDataSource.login(
+        email: emailcon.text.trim(),
+        pass: passcon.text,
+      );
+      if (loginResult.data == null) {
+        // Handle the case where login data is null
+        return;
       }
-      else {
+
+      changeLoadingValue();
+      /// Check if the email is verified
+      final verificationResult = await _remmoteDataSource.checkEmailVerified();
+
+      print(verificationResult.data);
+
+      if (verificationResult.data == verifiedenum.Verify) {
+
+        await Future.delayed(Duration(seconds: 5));
+        changeLoadingValue();
+        print(loginResult.data);
+        changeprogresshudValue();
+        if (loginResult.requestState == RequestState.success) {
+          if (loginResult.data!.user != null) {
+            // Retrieve user data from your data source
+            final userdata = await _remmoteDataSource.Getuserdata(id: loginResult.data!.user!.uid);
+            await _dBhelperdatasource.SaveuserinDB(user: userdata.data!);
+            final value = await _dBhelperdatasource.getuserfromDB();
+            print(value.requestState);
+            if (value.requestState == RequestState.success) {
+              changeprogresshudValue();
+              Navigator();
+            }
+          }
+        } else if (loginResult.requestState == RequestState.failed) {
+          await _remmoteDataSource.logout();
+          changeLoadingValue();
+        }
+      } else {
+
+        await _remmoteDataSource.logout();
         changeLoadingValue();
         return;
       }
-    });
+    } catch (e) {
+      // Handle exceptions here
+      print("Error during login: $e");
+    }
   }
 
+  checkpassseen()
+  {
+    check_seen=!check_seen;
+    update();
+  }
 
 }
 

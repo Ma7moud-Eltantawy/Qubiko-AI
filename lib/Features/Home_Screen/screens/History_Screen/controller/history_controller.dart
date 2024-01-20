@@ -9,15 +9,20 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:quickai/core/models/msg_model.dart';
 
 import '../../../../../core/constants.dart';
+import '../../../../../data/getched_data_helper.dart';
 import '../../Chat_Screen/Chat/controller/chat_controller.dart';
 
 class HistoryController extends GetxController {
+  BaseFetcheddataHelper _fetcheddataHelper=RemoteDBhelperdatasource();
   late ScrollController scrollController;
   final int perPage = 10;
 
   QueryDocumentSnapshot? lastDocument;
   bool isLoading = false;
   List<His_Model> historyDoc = [];
+  List<String> historyDocids = [];
+
+
 
   @override
   Future<void> onInit() async {
@@ -30,7 +35,7 @@ class HistoryController extends GetxController {
 
 
     // Trigger initial data load
-    getData;
+    getData();
   }
 
   Future<void> getData() async {
@@ -75,7 +80,7 @@ class HistoryController extends GetxController {
         lastDocument = querySnapshot.docs.last;
         historyDoc.addAll(querySnapshot.docs.map((el) =>
             His_Model.fromjson(el.data() as Map<String, dynamic>)));
-
+        historyDocids.addAll(querySnapshot.docs.map((el) =>el.id));
         print("Fetching data...");
 
       }
@@ -131,4 +136,25 @@ class HistoryController extends GetxController {
       print("Error fetching data: $e");
     }
   }
+
+  void Deletehistoryhistoryitem(int itemindex)
+  async {
+    await _fetcheddataHelper.DeleteHistoryitem(docid:historyDocids[itemindex] ,msgdoc:historyDoc[itemindex].id);
+    historyDoc.removeWhere((element) => element.id==historyDoc[itemindex].id);
+    historyDocids.removeAt(itemindex);
+    update();
+
+  }
+
+  Deleteallitems()
+  async {
+    await _fetcheddataHelper.deleteAllHistory();
+    historyDoc.clear();
+    update();
+
+  }
+
+
+
+
 }

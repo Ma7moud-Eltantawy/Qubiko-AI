@@ -32,10 +32,10 @@ class Proplasncontroller extends GetxController
   void initialitems() {
     ProPlansItems = [
       proplanitem(
+        premuimplan: PaymentPLAN.free,
           selected: getselectedornot(PaymentPLAN.free),
           onpress: (){
-            paymentplan=PaymentPLAN.month;
-            Get.to(()=>Paymentmethodscreen(),transition: kTransition2,duration: kTransitionDuration);
+
 
           },
           colors: [
@@ -51,11 +51,13 @@ class Proplasncontroller extends GetxController
               "proplan", "freefeatures").split(",").toList()
       ),
       proplanitem(
+          premuimplan: PaymentPLAN.month,
           selected:getselectedornot(PaymentPLAN.month),
           onpress: (){
             paymentplan=PaymentPLAN.month;
+            print(paymentplan.toString());
+            update();
             Get.to(()=>Paymentmethodscreen(),transition: kTransition2,duration: kTransitionDuration);
-
           },
           colors: [
             Color.fromRGBO(166, 201, 255, 1),
@@ -70,9 +72,12 @@ class Proplasncontroller extends GetxController
               "proplan", "paidfeatures").split(",").toList()
       ),
       proplanitem(
+          premuimplan: PaymentPLAN.halfyear,
           selected: getselectedornot(PaymentPLAN.halfyear),
           onpress: (){
             paymentplan=PaymentPLAN.halfyear;
+            print(paymentplan.toString());
+            update();
             Get.to(()=>Paymentmethodscreen(),transition: kTransition2,duration: kTransitionDuration);
           },
           colors: [
@@ -88,8 +93,11 @@ class Proplasncontroller extends GetxController
               "proplan", "paidfeatures").split(",").toList()
       ),
       proplanitem(
-        onpress: (){
+          premuimplan: PaymentPLAN.year,
+          onpress: (){
           paymentplan=PaymentPLAN.year;
+          print(paymentplan.toString());
+          update();
           Get.to(()=>Paymentmethodscreen(),transition: kTransition2,duration: kTransitionDuration);
 
         },
@@ -113,7 +121,9 @@ class Proplasncontroller extends GetxController
 
   bool getselectedornot(PaymentPLAN plan)
   {
-    if(paymentplan==plan)
+    print("current:${currentuserdata!.Premuimplan}");
+
+    if(currentuserdata!.Premuimplan==plan.toString())
       {
         return true;
       }
@@ -137,6 +147,7 @@ class proplanitem{
   final List<String> features;
   bool selected;
   final Function onpress;
+  final PaymentPLAN premuimplan;
 
   proplanitem( {
     required this.onpress,
@@ -145,6 +156,7 @@ class proplanitem{
     required this.price,
     required this.duration,
     required this.description,
-    required this.features
+    required this.features,
+    required this.premuimplan,
   });
 }

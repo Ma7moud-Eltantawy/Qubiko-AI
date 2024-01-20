@@ -37,7 +37,7 @@ class Signup_Screen extends StatelessWidget {
               child: Form(
                 key: con.formKey,
                 child: Column(
-                  crossAxisAlignment: crossAlignment,
+                  crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: [
                     Text(loc.translate('signup_screen','signup_welcome'),style: TextStyle(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/enums.dart';
 import 'package:quickai/core/models/His_model.dart';
 import 'package:quickai/core/models/previousSearchItemModel.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../data/getched_data_helper.dart';
 
 enum search_state {
   previous,
@@ -18,6 +21,7 @@ enum search_state {
 
 
 class Searchscreencontroller extends GetxController {
+  BaseFetcheddataHelper _fetcheddataHelper =RemoteDBhelperdatasource();
 
   late TextEditingController searchcon;
   var dataList = <PrevSearchmodel>[];
@@ -45,7 +49,7 @@ class Searchscreencontroller extends GetxController {
     searchcon=TextEditingController();
     streamController = StreamController<List<PrevSearchmodel>>.broadcast();
 
-    paginatedDataStream.listen((dataList) {
+    getprevioussearchdata.listen((dataList) {
       if (!streamController.isClosed) {
         streamController.add(dataList);
       }
@@ -86,7 +90,7 @@ class Searchscreencontroller extends GetxController {
 
 
 
-  Stream<List<PrevSearchmodel>> get paginatedDataStream async* {
+  Stream<List<PrevSearchmodel>> get getprevioussearchdata async* {
     DocumentSnapshot? lastDocument;
 
     while (true) {
@@ -95,7 +99,7 @@ class Searchscreencontroller extends GetxController {
 
         Query<Map<String, dynamic>> query = FirebaseFirestore.instance
             .collection('history')
-            .doc('oMI8mG5Ei7Ty9KV9XCYMxxYeVYk1')
+            .doc(currentuserdata!.userid)
             .collection('search_prev');
 
         var result = await query.limit(10).get();
@@ -137,9 +141,9 @@ class Searchscreencontroller extends GetxController {
 
       QuerySnapshot querySnapshot;
         querySnapshot = await FirebaseFirestore.instance
-            .collection('history')
-            .doc('oMI8mG5Ei7Ty9KV9XCYMxxYeVYk1')
-            .collection('history')
+            .collection('historycollectionlist')
+            .doc(currentuserdata!.userid)
+            .collection('hislist')
             .orderBy('timestamp')
             .get();
 
@@ -158,85 +162,26 @@ class Searchscreencontroller extends GetxController {
       print('Error fetching data: $e');
     }
   }
-  Future<RequestState> addPreviousSearchItem() async {
-    var uuid = Uuid();
-    String id = uuid.v4();
+  addPreviousSearchItem() async {
+    _fetcheddataHelper.addPreviousSearchItem(searchtitle: searchcon.text);
 
-    print("Generated ID: $id");
-    try {
-      await FirebaseFirestore.instance
-          .collection('history')
-          .doc('oMI8mG5Ei7Ty9KV9XCYMxxYeVYk1')
-          .collection('search_prev') // Corrected collection name
-          .doc(id)
-          .set(
-        His_Model(
-            title: searchcon.text,
-          timestamp: DateTime.now().toString(),
-          id: id,
-        ).tojson()
-
-      );
-      return RequestState.success;
-    } catch (e) {
-      print("Error adding previous search item: $e");
-      return RequestState.failed;
-    }
   }
 
 
   DeleteSearchitem({required String docid})
   async {
 
-
-    print(docid);
     dataList.removeWhere((element) => element.id == docid);
-    print("------------------------------------------");
-    print(dataList.length);
+    _fetcheddataHelper.DeleteSearchitem(docid: docid );
 
-    await FirebaseFirestore.instance
-        .collection('history')
-        .doc('oMI8mG5Ei7Ty9KV9XCYMxxYeVYk1')
-        .collection('search_prev')
-        .doc(docid)
-        .delete()
-        .then((value) {
-
-      print('Document deleted successfully.');
-
-
-
-    })
-        .catchError((error) {
-      searchState=search_state.failed as Rx<search_state>;
-          snackBarError("try agin");
-          print('Error deleting document: $error');
-
-    });
     update();
   }
   Future<void> deleteAllSearchPrev() async {
-    try {
-
-      CollectionReference searchPrevCollection = FirebaseFirestore.instance
-          .collection('history')
-          .doc('oMI8mG5Ei7Ty9KV9XCYMxxYeVYk1')
-          .collection('search_prev');
-
-      QuerySnapshot querySnapshot = await searchPrevCollection.get();
-      WriteBatch batch = FirebaseFirestore.instance.batch();
-      querySnapshot.docs.forEach((doc) {
-        batch.delete(doc.reference);
-      });
-
-      await batch.commit();
-      dataList.clear();
-      print('All documents in search_prev deleted successfully.');
-    } catch (error) {
-      snackBarError('Error deleting documents: $error');
-      print('Error deleting documents: $error');
-    }
-
+    _fetcheddataHelper.deleteAllSearchPrev().then((value){
+      if(value.requestState==RequestState.success){
+        dataList.clear();
+      }
+    });
     update();
   }
   Searchbyprevitem({required String prevtext})

@@ -1,21 +1,31 @@
+import 'dart:async';
+
+import 'package:quickai/Features/Aboutapp/view/Aboutapp_Screen.dart';
+import 'package:quickai/Features/Privacy&policy/view/privacyscreen.dart';
+import 'package:quickai/Features/help_center/view/helpcenter_view.dart';
+import 'package:quickai/Features/language/view/language_selected_view.dart';
+import 'package:quickai/Features/security_screen/view/security_screen.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/manager/colors_manager.dart';
+import 'package:quickai/core/models/Userdatamodel.dart';
 import 'package:quickai/core/styles/icons.dart';
+import 'package:quickai/options/Binding.dart';
 import 'package:quickai/options/Localization_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../../../widgets/logout_bottom_sheet.dart';
 import '../../../../payments/payment_method/view/paymentsscreenview.dart';
 import '../../../../payments/upgrade_to_pro/view/proplanscreen.dart';
 import '../../../../personal_info/view/personalinfo_screen.dart';
 
 
 class basicsitemdata{
-  final String hint;
+  String hint;
   final Widget leading;
-  final String title;
+   String title;
   final Function onpress;
   final Widget traling;
   final List<Color> colors;
@@ -51,79 +61,112 @@ class genralItemdata{
 
 
 class profileSettingsCpntroller extends GetxController{
-  static BuildContext ctx=Get.context!;
-  List<basicsitemdata> BasicsItems=[
-    basicsitemdata(
-      textcolor:Colors.black ,
-       hint: "mahmoudeltantawy2019@gmail.com",
-        leading: Container(
-          height:Get.height/15,width: Get.width/5,
-          child:
-          CachedNetworkImage(
-            imageUrl: currentuserdata!.pic.toString(),
-            placeholder: (context, url) => Center(
-              child: CircularProgressIndicator(
-                color: ColorsManager.burble,
-                strokeWidth: Get.width / 200,
-              ),
-            ),
-            errorWidget: (context, url, error) => Container(
-              padding: EdgeInsets.all(Get.width / 120),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(width: Get.width / 300, color: ColorsManager.burble),
-              ),
-              child: Icon(
-                Icons.error,
-                color: ColorsManager.burble,
-              ),
-            ),
-            imageBuilder: (context, imageProvider) => Container(
-              height: Get.height/7,
-              width: Get.width/4,
-              decoration: BoxDecoration(
 
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
+  late Userdatamodel userdata;
+  late List<basicsitemdata> BasicsItems;
+
+@override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+
+
+}
+  @override
+  void onReady() {
+    userdata = currentuserdata!;
+
+    // TODO: implement onReady
+    super.onReady();
+    print("setting_redy");
+    BasicsItems=[
+      basicsitemdata(
+          textcolor:Colors.black ,
+          hint: userdata.email!,
+          leading: Container(
+            height:Get.height/15,width: Get.width/5,
+            child:
+            CachedNetworkImage(
+              imageUrl: currentuserdata!.pic.toString(),
+              placeholder: (context, url) => Center(
+                child: CircularProgressIndicator(
+                  color: ColorsManager.burble,
+                  strokeWidth: Get.width / 200,
+                ),
+              ),
+              errorWidget: (context, url, error) => Container(
+                padding: EdgeInsets.all(Get.width / 120),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(width: Get.width / 300, color: ColorsManager.burble),
+                ),
+                child: Icon(
+                  Icons.error,
+                  color: ColorsManager.burble,
+                ),
+              ),
+              imageBuilder: (context, imageProvider) => Container(
+                height: Get.height/7,
+                width: Get.width/4,
+                decoration: BoxDecoration(
+
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        colors: [Colors.transparent,Colors.transparent],
-        title: "mahmoud eltantawy", onpress: (){
+          colors: [Colors.transparent,Colors.transparent],
+          title:userdata.name!, onpress: (){
         print("object");
-    },
-        traling: Icon(IconBroken.Arrow___Right_2)),
-    basicsitemdata(
-      textcolor: Colors.white,
-        hint:AppLocalizations.of(ctx).translate("mainaccount", "profilehint"),
-        colors: [
-          ColorsManager.burble,
-          ColorsManager.burble,
-          ColorsManager.burble,
-          ColorsManager.purble2
-        ],
-        leading: Container(
-          height:Get.height/15,width: Get.width/5,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/img/propic.png"),
-              )
+        update();
+      },
+          traling: Icon(IconBroken.Arrow___Right_2)),
+      basicsitemdata(
+          textcolor: Colors.white,
+          hint:AppLocalizations.of(ctx).translate("mainaccount", "profilehint"),
+          colors: [
+            ColorsManager.burble,
+            ColorsManager.burble,
+            ColorsManager.burble,
+            ColorsManager.purble2
+          ],
+          leading: Container(
+            height:Get.height/15,width: Get.width/5,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/img/propic.png"),
+                )
+            ),
+
+
           ),
+          title: AppLocalizations.of(ctx).translate("mainaccount", "protitle"),
+          onpress: (){
+            print("object2");
+            Get.to(()=>ProPlanScreen(),transition: kTransition2,duration: kTransitionDuration);
+          },
+          traling: Icon(IconBroken.Arrow___Right_2,color: Colors.white,))
+
+    ];
+    update();
+
+  }
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    print("closed");
+  }
 
 
-        ),
-        title: AppLocalizations.of(ctx).translate("mainaccount", "protitle"),
-        onpress: (){
-          print("object2");
-        Get.to(ProPlanScreen(),transition: kTransition2,duration: kTransitionDuration);
-        },
-        traling: Icon(IconBroken.Arrow___Right_2,color: Colors.white,))
+  static BuildContext ctx=Get.context!;
 
-  ];
+
+
   List<genralItemdata> Genralitems=[
     genralItemdata(
         leading: Icon(IconBroken.Profile,color: Colors.black,),
@@ -135,12 +178,17 @@ class profileSettingsCpntroller extends GetxController{
     genralItemdata(
         leading: Icon(IconBroken.Shield_Done,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item2"),
-        onpress: (){},
+        onpress: (){
+          Get.to(()=>Securityscreen(),transition: kTransition2,duration: kTransitionDuration);
+
+        },
         traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.Document,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item3"),
-        onpress: (){},
+        onpress: (){
+          Get.toNamed(Language_screen.scid);
+        },
         traling: Container(
             width: Get.width/3,
 
@@ -148,7 +196,7 @@ class profileSettingsCpntroller extends GetxController{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("English (US)",style: TextStyle(
+                Text(AppLocalizations.of(ctx).translate("languagesc", "lang"),style: TextStyle(
                   color: Colors.black38,
                   fontSize: Get.width/30,
                 ),),
@@ -163,24 +211,35 @@ class profileSettingsCpntroller extends GetxController{
     genralItemdata(
         leading: Icon(IconBroken.Paper,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item4"),
-        onpress: (){},
+        onpress: (){
+          Get.toNamed(HelpCebterScreen.scid);
+        },
         traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.Lock,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item5"),
-        onpress: (){},
+        onpress: (){
+          Get.toNamed(Privacyscreen.scid);
+
+        },
         traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.More_Square,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item6"),
-        onpress: (){},
+        onpress: (){
+          Get.toNamed(AboutappScreen.scid);
+        },
         traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.Logout,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item7"),
-        onpress: (){},
+        onpress: (){
+          Logout_bottocheet(Get.context!,height,width);
+        },
         traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
 
   ];
+
+
 
 }

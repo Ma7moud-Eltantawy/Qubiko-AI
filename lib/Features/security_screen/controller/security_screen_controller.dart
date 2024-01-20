@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quickai/core/constants.dart';
 
+import '../../../data/Auth_Helper.dart';
 import '../../../options/Localization_options.dart';
 
 class Securityscreencontroller extends GetxController
 {
+  BaseAuthDataSource _authDataSource=AuthRemoteDataSource();
   static BuildContext ctx=Get.context!;
   List <Securityitem>  secitems=[
     Securityitem(itemtitle:  AppLocalizations.of(ctx).translate("securityscreen", "item0"),switchval: true),
@@ -16,6 +19,13 @@ class Securityscreencontroller extends GetxController
 
   ];
 
+  changepassword()
+  {
+    _authDataSource.sendPasswordResetEmail(email: currentuserdata!.email!).then((value){
+      showsnackbar(content: AppLocalizations.of(ctx).translate("snackbarmsg", "mailchpass"));
+
+    });
+  }
 
 }
 

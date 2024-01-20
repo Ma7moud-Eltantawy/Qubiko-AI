@@ -8,12 +8,14 @@ import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class Splash_screen extends StatelessWidget {
-  const Splash_screen({Key? key}) : super(key: key);
+   Splash_screen({Key? key}) : super(key: key);
+  static const scid="/Splash_screen";
+  Splash_controller controller=Get.find();
 
 
   @override
   Widget build(BuildContext context) {
-    Splash_controller controller=Get.put(Splash_controller());
+
     var size=MediaQuery.of(context).size;
     var height=size.height;
     var width=size.width;

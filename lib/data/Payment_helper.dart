@@ -43,20 +43,6 @@ class RemotePaymentDataSource extends PaymentBaseDataSource {
   Future<void> initializePaymentSheet(String clientSecret) async {
 
 
-    final billingDetails = BillingDetails(
-      name: "Test User",
-      email: 'email@stripe.com',
-      phone: '+48888000888',
-      address: Address(
-        city: 'Houston',
-        country: 'US',
-        line1: '1459  Circle Drive',
-        line2: '',
-        state: 'Texas',
-        postalCode: '77063',
-      ),
-    );
-
     try{
       var gpay = PaymentSheetGooglePay(merchantCountryCode: "GB",
           currencyCode: "GBP",

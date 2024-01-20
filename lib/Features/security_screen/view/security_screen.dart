@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:quickai/Features/security_screen/controller/security_screen_controller.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/manager/colors_manager.dart';
+import 'package:quickai/data/Auth_Helper.dart';
+import 'package:quickai/data/chatgpt.dart';
 import 'package:quickai/widgets/material_button.dart';
 
 import '../../../options/Localization_options.dart';
 class Securityscreen extends StatelessWidget {
-  const Securityscreen({Key? key}) : super(key: key);
+
+   Securityscreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,10 @@ class Securityscreen extends StatelessWidget {
             ),
           ),
 
-          materialbutton(height: height, width: width, colors: [ColorsManager.burble.withOpacity(.2),ColorsManager.burble.withOpacity(.2)], text: loc.translate("securityscreen", "chpass"), onpress: (){
+          materialbutton(height: height, width: width, colors: [ColorsManager.burble.withOpacity(.2),ColorsManager.burble.withOpacity(.2)],
+              text: loc.translate("securityscreen", "chpass"), onpress: (){
+                 controller.changepassword();
+
             
           }, textcolor: ColorsManager.burble)
         ],

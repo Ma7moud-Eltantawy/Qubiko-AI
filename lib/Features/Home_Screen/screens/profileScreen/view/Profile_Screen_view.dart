@@ -1,6 +1,8 @@
 import 'package:quickai/Features/Home_Screen/screens/profileScreen/builder/Profile_Settings_controller.dart';
+import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/manager/colors_manager.dart';
 import 'package:quickai/core/manager/text_style_manager.dart';
+import 'package:quickai/core/models/Userdatamodel.dart';
 import 'package:quickai/options/Localization_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,7 +22,9 @@ class ProfileSettingsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(loc.translate("mainaccount", "screentitle"),style: TextStyle(
+        title:
+
+        Text(loc.translate("mainaccount", "screentitle"),style: TextStyle(
 
             fontSize: width/18
         ),),
@@ -31,8 +35,8 @@ class ProfileSettingsView extends StatelessWidget {
 
             },
             child: Padding(
-              padding: const EdgeInsets.only(
-                right: 10,
+              padding:  EdgeInsets.only(
+                right: width/60,
               ),
             ),
           ),
@@ -49,7 +53,8 @@ class ProfileSettingsView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: width/30),
           child: Column(
             children: [
-              ListView.builder(
+              GetBuilder<profileSettingsCpntroller>(
+                builder:(con)=> ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: controller.BasicsItems.length,
@@ -78,6 +83,7 @@ class ProfileSettingsView extends StatelessWidget {
                     ),
                   ),
 
+                                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: height/80),
@@ -118,7 +124,7 @@ class ProfileSettingsView extends StatelessWidget {
 
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: height/80),
+                padding: EdgeInsets.symmetric(vertical: height/160),
                 child: Row(children: [
                   Text(AppLocalizations.of(context).translate("mainaccount", "about"),
                   style: getLightStyle(color: Colors.grey, fontSize: width/25),
@@ -141,10 +147,10 @@ class ProfileSettingsView extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(width/27),
                   ),
-                  height: height/18,
+                  height: height/16,
                   child: Center(
                     child: ListTile(
-                      onTap: ()=>controller.Aboullistitems[index].onpress,
+                      onTap: ()=>controller.Aboullistitems[index].onpress(),
                       title: Text(controller.Aboullistitems[index].title,overflow: TextOverflow.ellipsis,maxLines: 1,),
                       titleTextStyle: getMediumStyle(color: ColorsManager.black, fontSize: width/27),
                       trailing: controller.Aboullistitems[index].traling,

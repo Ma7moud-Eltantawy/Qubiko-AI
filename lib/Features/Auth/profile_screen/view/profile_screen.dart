@@ -48,7 +48,7 @@ class Profile_screen extends StatelessWidget {
                   child: Form(
                     key: con.formKey,
                     child: Column(
-                      crossAxisAlignment: crossAlignment,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
 
 

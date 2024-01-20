@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:quickai/Features/on_boarding/view/on_boarding_screen.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/enums.dart';
+import 'package:quickai/core/models/Userdatamodel.dart';
+import 'package:quickai/core/networking/request_result.dart';
+import 'package:quickai/data/Auth_Helper.dart';
+import 'package:quickai/data/DB_Helper.dart';
 import 'package:quickai/data/Payment_helper.dart';
 
 import '../../../../core/entities/proplanitems.dart';
@@ -15,6 +19,8 @@ class PaymentController extends GetxController {
 
 
   final PaymentBaseDataSource dataSource = RemotePaymentDataSource();
+  final BaseAuthDataSource baseAuthDataSource=AuthRemoteDataSource();
+  final BaseDBhelperdatasource dBhelperdatasource=RemoteDBhelperdatasource();
   late final PaymentManager payment;
   RxBool isCheckoutLoading = false.obs;
   bool progresshudstate=false;
@@ -36,6 +42,7 @@ class PaymentController extends GetxController {
     selectedPaymentMethod= PaymentMethod.nopay;
     print(controller.paymentplan.toString());
     proplandataitem=getproplandata(plan: controller.paymentplan);
+    print("mmm ${proplandataitem.total}");
 
     // Any additional initialization logic can go here
   }
@@ -47,6 +54,27 @@ class PaymentController extends GetxController {
         payment.makePayment(proplandataitem.total , "USD").then((value) {
           if(value==RequestState.success)
             {
+              baseAuthDataSource.uploaduserdata(
+
+                  user: Userdatamodel(userid: currentuserdata!.userid,
+                      email: currentuserdata!.email!,
+                      name: currentuserdata!.name,
+                      phone: currentuserdata!.phone,
+                      pic: currentuserdata!.pic,
+                      verified: currentuserdata!.verified,
+                      Premiun: true,
+                      premuimtodate:Prmuimtodate(),
+                      Premuimplan: proplandataitem.paymentplan.toString(),
+                      DateofBirth: currentuserdata!.DateofBirth));
+              baseAuthDataSource.Getuserdata(id: currentuserdata!.userid!).then((value) async {
+                if(value.requestState==RequestState.success)
+                {
+                  print(value.data!.Premuimplan);
+                  await dBhelperdatasource.SaveuserinDB(user:value.data!);
+                  dBhelperdatasource.getuserfromDB();
+                }
+              });
+
               changeprogresshudstate();
             }
           else
@@ -108,7 +136,31 @@ class PaymentController extends GetxController {
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
           print("onSuccess: $params");
+          baseAuthDataSource.uploaduserdata(
+              user: Userdatamodel(userid: currentuserdata!.userid,
+                  email: currentuserdata!.email!,
+                  name: currentuserdata!.name,
+                  phone: currentuserdata!.phone,
+                  pic: currentuserdata!.pic,
+                  verified: currentuserdata!.verified,
+                  Premiun: true,
+                  premuimtodate:Prmuimtodate(),
+                  Premuimplan: proplandataitem.paymentplan.toString(),
+                  DateofBirth: currentuserdata!.DateofBirth));
+          baseAuthDataSource.Getuserdata(id: currentuserdata!.userid!).then((value) async {
+            if(value.requestState==RequestState.success)
+              {
+                print(value.data!.Premuimplan);
+                await dBhelperdatasource.SaveuserinDB(user:value.data!);
+                dBhelperdatasource.getuserfromDB();
+              }
+          });
+
+
+          
           changeprogresshudstate();
+
+
 
         },
         onError: (error) {
@@ -158,6 +210,26 @@ class PaymentController extends GetxController {
    {
      progresshudstate=!progresshudstate;
      update();
+   }
+
+
+   String Prmuimtodate()
+   {
+     DateTime currentDate = DateTime.now();
+     String DaysLater= "";
+     if(proplandataitem.paymentplan!=PaymentPLAN.month) {
+       DaysLater = currentDate.add(Duration(days: 30)).toString();
+     }
+     if(proplandataitem.paymentplan!=PaymentPLAN.halfyear) {
+       DaysLater =currentDate.add(Duration(days: 30 * 6)).toString();
+     }
+     if(proplandataitem.paymentplan!=PaymentPLAN.month) {
+       DaysLater =currentDate.add(Duration(days: 30 * 12)).toString();
+     }
+
+     return DaysLater;
+
+
    }
 
 

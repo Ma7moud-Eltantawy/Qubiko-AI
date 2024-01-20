@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' show AlertDialog, BuildContext, Color, Colors, Container, Navigator, TextStyle, showDialog;
 import 'package:get/get.dart';
 import 'package:quickai/core/constants.dart';
+import 'package:quickai/core/networking/request_result.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:toast/toast.dart';
 
@@ -78,6 +79,21 @@ void showdatePicker({required BuildContext context, required TextEditingControll
       );
     },
   );
+}
+
+
+
+bool Checkpremuimdate({required DateTime date})
+{
+  DateTime currentDate = DateTime.now();
+  DateTime targetDate = date; // Year, Month, Day
+  if (targetDate.isAfter(currentDate)) {
+    print('Target date is after the current date.');
+    return true;
+  } else {
+    return false;
+  }
+
 }
 
 

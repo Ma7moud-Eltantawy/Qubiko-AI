@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickai/core/constants.dart';
+import 'package:quickai/core/enums.dart';
 import 'package:quickai/core/manager/text_style_manager.dart';
 import 'package:quickai/widgets/material_button.dart';
 
@@ -23,7 +24,7 @@ class ProPlanScreen extends StatelessWidget {
               margin: EdgeInsets.all(width/30),
               decoration: BoxDecoration(
                   color: Color.fromRGBO(250, 250, 250, 1),
-                  border: Border.all(color: ColorsManager.burble.withOpacity(.5),width:width/1500),
+                  border: Border.all(color: data.selected?Color(0xFFFFD700):ColorsManager.burble.withOpacity(.5),width:data.selected?width/1000:width/1500),
 
                 borderRadius: BorderRadius.circular(width/50)
               ),
@@ -65,7 +66,18 @@ class ProPlanScreen extends StatelessWidget {
                   Column(
                     children: data.features.map((item) => buildListItem(item)).toList(),
                   ),
-                  !data.selected?materialbutton(height: height, width: width, colors: [ColorsManager.burble,ColorsManager.purble2], text: controller.loc.translate("proplan", "buttontitle"), onpress:()=>data.onpress(), textcolor: Colors.white):Container(),
+
+                  !data.selected && data.premuimplan != PaymentPLAN.free
+                      ? materialbutton(
+                    height: height,
+                    width: width,
+                    colors: [ColorsManager.burble, ColorsManager.purble2],
+                    text: controller.loc.translate("proplan", "buttontitle"),
+                    onpress: () => data.onpress(),
+                    textcolor: Colors.white,
+                  )
+                      : Container(),
+
                 ],
               ),
             );}),

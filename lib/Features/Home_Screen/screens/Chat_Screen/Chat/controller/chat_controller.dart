@@ -2,14 +2,17 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/models/msg_model.dart';
 import 'package:quickai/data/chatgpt.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../../../core/entities/msg.dart';
+import '../../../../../../data/Google_Ads.dart';
 
 class MsgData {
   MsgData({required this.sendByMe, required this.msgTxt});
@@ -26,6 +29,7 @@ class AssistantController extends GetxController {
   List<msg_model> Msgs;
   String userid;
   String searchtitle;
+  final BaseAdsHelper adsHelper = RemoteAdsHelper();
 
 
 
@@ -65,6 +69,7 @@ class AssistantController extends GetxController {
   @override
   void onReady() {
     // TODO: implement onReady
+    adsHelper.createRewadedAd();
 
     super.onReady();
     uuid = userid.isEmpty?Uuid().v4():userid;
@@ -96,6 +101,7 @@ class AssistantController extends GetxController {
     if (msgController.text.isNotEmpty) {
       if(msgs.isEmpty)
       {
+        adsHelper.showRewardedAd();
         await baseChatGptDataSource.setnewhistorycollection(userid:  currentuserdata!.userid.toString(), msg: msgController.text,docid:uuid );
 
       }
@@ -137,6 +143,16 @@ class AssistantController extends GetxController {
     }
     print(scrollController.hasClients);
   }
+  void copyToClipboard(int index) {
+    Clipboard.setData(ClipboardData(text: msgs[index].textmsg));
+    showsnackbar(content: "Text copied to clipboard");
+  }
+  Future<void> sharemsgto(int index) async {
+    await Share.share('check out my website https://example.com');
+
+  }
+
+
 }
 
 

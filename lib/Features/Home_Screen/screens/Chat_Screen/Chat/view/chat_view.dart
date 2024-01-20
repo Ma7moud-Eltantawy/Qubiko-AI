@@ -195,12 +195,16 @@ class Chat_screen extends StatelessWidget {
                                       children: [
                                         Container(
 
-                                          child: IconButton(onPressed: (){},
+                                          child: IconButton(onPressed: (){
+                                            con.copyToClipboard(index);
+                                          },
                                               icon: Icon(Icons.copy,size: width/25,color: Colors.grey.shade500,)),
                                         ),
                                         Container(
 
-                                          child: IconButton(onPressed: (){},
+                                          child: IconButton(onPressed: (){
+                                            con.sharemsgto(index);
+                                          },
                                               icon: Icon(Icons.share,size: width/25,color: Colors.grey.shade500,)),
                                         ),
                                       ],

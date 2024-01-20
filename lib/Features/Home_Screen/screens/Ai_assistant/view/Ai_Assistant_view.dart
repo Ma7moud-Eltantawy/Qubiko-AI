@@ -115,7 +115,7 @@ class items_view extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: crossAlignment,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: height/60),
@@ -173,7 +173,7 @@ class category_item_view extends StatelessWidget {
         ),
       
         child: Column(
-          crossAxisAlignment: crossAlignment,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(currentitemdata.img,height: height/12,width: width/6,fit: BoxFit.fill,),

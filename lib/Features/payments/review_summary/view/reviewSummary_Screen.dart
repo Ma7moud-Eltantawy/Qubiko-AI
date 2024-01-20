@@ -50,7 +50,7 @@ class reviewsummaryScreen extends StatelessWidget {
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal:width/30,vertical: height/30 ),
             child: Column(
-              crossAxisAlignment: crossAlignment,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                  decoration: BoxDecoration(

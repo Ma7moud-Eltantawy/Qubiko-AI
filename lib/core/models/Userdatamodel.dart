@@ -1,7 +1,8 @@
 import 'package:quickai/core/entities/UserData.dart';
 
 class Userdatamodel extends UserData{
-  Userdatamodel({
+  Userdatamodel( {
+    required super.email,
     required super.userid,
     required super.name,
     required super.phone,
@@ -18,7 +19,8 @@ class Userdatamodel extends UserData{
       Premiun: json['prem'],
       premuimtodate: json['premtodate'].toString(),
       Premuimplan: json['premplan'].toString(),
-      DateofBirth: json['dateofbirth']
+      DateofBirth: json['dateofbirth'],
+      email: json['email'],
 
     );
 
@@ -35,6 +37,7 @@ class Userdatamodel extends UserData{
       "premtodate":premuimtodate,
       "premplan":Premuimplan,
       "dateofbirth":DateofBirth,
+      "email":email,
 
 
     };

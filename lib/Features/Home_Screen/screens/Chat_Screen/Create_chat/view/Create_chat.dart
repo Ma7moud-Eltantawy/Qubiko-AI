@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
+import '../../../../../../data/Google_Ads.dart';
 class Create_chat extends StatelessWidget {
   const Create_chat({Key? key}) : super(key: key);
 
@@ -55,6 +57,10 @@ class Create_chat extends StatelessWidget {
           SizedBox(height: height/20
           ),
           materialbutton(height: height, width: width,colors: [ColorsManager.burble,ColorsManager.purble2],onpress: (){
+
+
+
+
             Get.to(()=>Chat_screen(msgsdata:[],docid:"",searchtitle:"",),transition: kTransition2,duration: kTransitionDuration);
 
 

@@ -30,7 +30,7 @@ class RemoteChatGptDataSource implements BaseChatGptDataSource{
      var headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer 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',
+        'Authorization': 'Bearer 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',
         'Cookie': '__cf_bm=IxRdrxi3Rh_W.7XewovJCvi.C3.lV_PaVl5ioX83Qr8-1702005011-0-AZHx4wXCGSiImNhAmUqSYm4SispTTYnR1Qe51i+8PDu3WE3rjqncWgCjsph6uYWo291cDHBjk06dGs+MOEGxJCU=; _cfuvid=Eh2KUZmhcSPUFIVIuu.nAIWhgiq.8fZvRqCP.bLEVh4-1702005011325-0-604800000'
      };
      try {
