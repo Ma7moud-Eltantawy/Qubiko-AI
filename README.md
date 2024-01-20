@@ -1,16 +1,23 @@
-# quickai
+# Flutter Chatbot Application
 
-A new Flutter project.
+This Flutter application features a chatbot with various functionalities, including API integration, state management using GetX, and integration with two popular payment gateways: Stripe and PayPal. Additionally, the app incorporates Google Ads for monetization, Firebase authentication for user verification via both phone and Gmail, and supports localization for two languages: Arabic and English.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Chatbot:** The app includes a chatbot feature to facilitate interactive communication with users.
 
-A few resources to get you started if this is your first Flutter project:
+- **API Integration:** Utilizes API calls to fetch and display relevant data within the app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **State Management:** Implements state management using the GetX package for efficient and reactive UI updates.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Payment Gateways:**
+  - **Stripe:** Enables secure payment transactions using the Stripe payment gateway.
+  - **PayPal:** Offers an alternative payment method through integration with the PayPal payment gateway.
+
+- **Google Ads:** Monetizes the app by integrating Google Ads to display advertisements to users.
+
+- **Firebase Authentication:**
+  - **Phone Verification:** Users can verify their identity through phone number authentication using Firebase.
+  - **Gmail Verification:** Implements Firebase authentication for users logging in via Gmail.
+
+- **Localization:** Supports two languages, Arabic and English, to enhance user experience across different regions.
