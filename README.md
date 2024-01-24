@@ -38,6 +38,9 @@ This Flutter application features a chatbot with various functionalities, includ
 ![sc6](https://github.com/Ma7moud-Eltantawy/Qubiko-AI/assets/61250075/353929b9-cd14-4c40-8ec3-7565ef6f9d03)
 
 
+## Screenshot Video
+
+https://github.com/Ma7moud-Eltantawy/Qubiko-AI/assets/61250075/34355ecd-4824-49f8-9c7e-a12919bcb047
 
 
 
