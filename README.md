@@ -21,3 +21,9 @@ This Flutter application features a chatbot with various functionalities, includ
   - **Gmail Verification:** Implements Firebase authentication for users logging in via Gmail.
 
 - **Localization:** Supports two languages, Arabic and English, to enhance user experience across different regions.
+
+  
+## Screenshots
+
+![sc1](https://github.com/Ma7moud-Eltantawy/Qubiko-AI/assets/61250075/d3485d4e-92e7-4bc9-8e42-96750b860e33)
+
