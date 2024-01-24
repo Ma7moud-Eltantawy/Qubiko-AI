@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/enums.dart';
 
 import '../core/networking/request_result.dart';
@@ -28,8 +29,11 @@ class RemoteAdsHelper implements BaseAdsHelper {
   @override
   Future<RequestResult<InterstitialAd>> createInterstitialAd() async {
     try {
-      if (_interstitialAd == null) {
-        InterstitialAd.load(
+      if(currentuserdata!=null)
+      {
+      if ( currentuserdata!.Premiun==false) {
+
+        await InterstitialAd.load(
           adUnitId: AdHelper.interstitialAdUnitId,
           request: request,
           adLoadCallback: InterstitialAdLoadCallback(
@@ -44,7 +48,7 @@ class RemoteAdsHelper implements BaseAdsHelper {
           ),
         );
         print("is null: ${_interstitialAd==null}");
-      }
+      }}
       return RequestResult(requestState: RequestState.success, data: _interstitialAd);
     } catch (e) {
       return RequestResult(requestState: RequestState.failed, errorMessage: '$e');
@@ -55,6 +59,7 @@ class RemoteAdsHelper implements BaseAdsHelper {
   void showInterstitialAd() {
     try {
       if (_interstitialAd != null) {
+        if (currentuserdata!.Premiun==false) {
         _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
           onAdDismissedFullScreenContent: (InterstitialAd ad) {
             ad.dispose();
@@ -66,7 +71,7 @@ class RemoteAdsHelper implements BaseAdsHelper {
           },
         );
         _interstitialAd!.show();
-      } else {
+      } }else {
         print("Interstitial ad is null. Please load the ad before trying to show it.");
       }
     } catch (e) {
@@ -78,6 +83,7 @@ class RemoteAdsHelper implements BaseAdsHelper {
   Future<RequestResult<RewardedAd>> createRewadedAd()  async {
     try {
       if (_rewardedAd == null) {
+        if ( currentuserdata!.Premiun==false) {
         RewardedAd.load(
           adUnitId: AdHelper.rewardedAdUnitId,
           request: AdRequest(),
@@ -100,7 +106,7 @@ class RemoteAdsHelper implements BaseAdsHelper {
           ),
         );
         print("is null: ${_rewardedAd==null}");
-      }
+      }}
       return RequestResult(requestState: RequestState.success, data: _rewardedAd);
     } catch (e) {
       return RequestResult(requestState: RequestState.failed, errorMessage: '$e');
@@ -111,6 +117,7 @@ class RemoteAdsHelper implements BaseAdsHelper {
   void showRewardedAd() {
     try {
       if (_rewardedAd != null) {
+        if (currentuserdata!.Premiun==false) {
         _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
           onAdDismissedFullScreenContent: (RewardedAd ad) {
             ad.dispose();
@@ -131,7 +138,7 @@ class RemoteAdsHelper implements BaseAdsHelper {
       } else {
         print("Rewarded ad is null. Please load the ad before trying to show it.");
       }
-    } catch (e) {
+    }} catch (e) {
       print('Error: $e');
     }
   }

@@ -44,7 +44,13 @@
     "success_msg": "Log in Successful!",
     "hint_suc_msg": "Please wait...\nYou will be directed to the homepage."
   },
+
+
+
+
+
   "Writing": {
+
     "title1":"Write an Articles",
     "hint1":"Generate well-written articles on any topic you want.",
     "serchtitle1":"Write an article about ",
@@ -173,7 +179,7 @@
     "duration2": "6 months",
     "duration3": "12 months",
     "freefeatures": "Only available when demand is low,Slow response speed,New feature updates are slower",
-    "paidfeatures": "Always available in any demand,Fast response speed,Priority access to new features,Advanced analytics,Dedicated support"
+    "paidfeatures": "Always available in any demand,Fast response speed,Priority access to new features,Advanced analytics,Dedicated suppor,No advertisements "
 
   },
 
@@ -261,17 +267,55 @@
 
 
   "snackbarmsg": {
-    "mailchpass": "Check your email to reset password."
+    "usernotfound": "No user found for that email.",
+    "wrongpass": "Wrong password provided for that user.",
+    "mailchpass": "Check your email to reset password.",
+    "updateuser": "User data updated.",
+    "notupdateuser": "User data not updated.",
+    "notverify": "Email Not Verified, Please Check Your Emails",
+    "verifymsg": "Please Check Your Emails, to verify this account.",
+    "copy": "Text copied to clipboard"
 
   },
+  "wlcomesc":
+  {
+    "title": "Welcome to \nQubiko AI \uD83D\uDC4B",
+    "but1": "Log in",
+    "but2": "Sign up",
+    "contwith": "or continue with"
+
+  },
+
+
 
   "logout": {
     "sctitle": "logout",
     "msg": "Are you sure you want to log out?",
     "logout": "Yes, Logout",
     "cancel": "Cancel"
+  },
+
+  "apphomescs": {
+    "sc1": "Chat",
+    "sc2": "AI Assistants",
+    "sc3": "History",
+    "sc4": "Profile"
+  },
+
+  "aicategories": {
+    "cat1": "ALL",
+    "cat2": "Writing",
+    "cat3": "Creative",
+    "cat4": "Business",
+    "cat5": "Social Media",
+    "cat6": "Developer",
+    "cat7": "Personal",
+    "cat8": "Others"
+  },
+  "faqscat": {
+    "cat1": "All",
+    "cat2": "Genral",
+    "cat3": "Account",
+    "cat4": "Service"
   }
-
-
-
 }

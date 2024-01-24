@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../../../../../core/utils/functions.dart';
 import '../../../../../../data/Google_Ads.dart';
 class Create_chat extends StatelessWidget {
   const Create_chat({Key? key}) : super(key: key);

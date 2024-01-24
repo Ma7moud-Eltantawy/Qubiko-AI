@@ -29,15 +29,9 @@ class ProfileSettingsView extends StatelessWidget {
             fontSize: width/18
         ),),
         actions: [
-          InkWell(
-            onTap: () {
-              //Get.to(My_profile(),transition: kTransition2,duration: kTransitionDuration);
-
-            },
-            child: Padding(
-              padding:  EdgeInsets.only(
-                right: width/60,
-              ),
+          Padding(
+            padding:  EdgeInsets.only(
+              right: width/60,
             ),
           ),
         ],

@@ -8,6 +8,7 @@ import 'package:quickai/Features/Aboutapp/view/Aboutapp_Screen.dart';
 import 'package:quickai/Features/Auth/Login/view/Login_screen.dart';
 import 'package:quickai/Features/Auth/profile_screen/view/profile_screen.dart';
 import 'package:quickai/Features/Home_Screen/home/view/Home_Screen_view.dart';
+import 'package:quickai/Features/Home_Screen/screens/Ai_assistant/view/Ai_Assistant_view.dart';
 import 'package:quickai/Features/Home_Screen/screens/Chat_Screen/Chat/view/chat_view.dart';
 import 'package:quickai/Features/Home_Screen/screens/History_Screen/view/History_view.dart';
 import 'package:quickai/Features/Search_screen/view/search_view.dart';
@@ -33,7 +34,6 @@ import 'Features/Privacy&policy/view/privacyscreen.dart';
 import 'Features/help_center/Screens/FaqsScreen/controller/faqscontroller.dart';
 import 'Features/help_center/controller/helpcenter_controller.dart';
 import 'Features/help_center/view/helpcenter_view.dart';
-import 'Features/otp_screen/view/otpscreen_view.dart';
 import 'Features/payments/payment_method/view/paymentsscreenview.dart';
 import 'Features/payments/review_summary/view/reviewSummary_Screen.dart';
 import 'Features/payments/upgrade_to_pro/view/proplanscreen.dart';
@@ -91,12 +91,15 @@ class MyApp extends StatelessWidget {
        initialBinding: HomeBinding(),
 
        getPages: [
+         GetPage(name: AI_Assistant_Screen.scid, page: () => AI_Assistant_Screen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
+
          GetPage(name: Splash_screen.scid, page: () => Splash_screen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
          GetPage(name: HelpCebterScreen.scid, page: () => HelpCebterScreen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
          GetPage(name: Faqsscreen.scid, page: () => Faqsscreen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
          GetPage(name: ContactmeScreen.scid, page: () => ContactmeScreen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
          GetPage(name: Privacyscreen.scid, page: () => Privacyscreen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
          GetPage(name: AboutappScreen.scid, page: () => AboutappScreen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
+         GetPage(name: Language_screen.scid, page: () => Language_screen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
          GetPage(name: Language_screen.scid, page: () => Language_screen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
 
 
@@ -124,6 +127,14 @@ class MyApp extends StatelessWidget {
 
   }
 }
+
+TextDirection getTextDirection(BuildContext context) {
+  // Use MediaQuery to get the current text direction
+  return MediaQuery.of(context).platformBrightness == Brightness.dark
+      ? TextDirection.rtl
+      : TextDirection.ltr;
+}
+
 
 
 

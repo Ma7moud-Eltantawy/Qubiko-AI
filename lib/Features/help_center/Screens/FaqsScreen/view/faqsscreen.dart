@@ -10,6 +10,7 @@ class Faqsscreen extends StatelessWidget {
   Faqsscreen({Key? key}) : super(key: key);
   static const scid="/faqsscreen";
 
+
   FaqsController controller=Get.find();
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickai/core/constants.dart';
 
+import '../../../core/utils/functions.dart';
 import '../../../data/Auth_Helper.dart';
 import '../../../options/Localization_options.dart';
 

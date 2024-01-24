@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show AlertDialog, BuildContext, Color, Colors, Container, Navigator, TextStyle, showDialog;
+import 'package:flutter/material.dart' show AlertDialog, BuildContext, Color, Colors, Container, Navigator, ScaffoldMessenger, SnackBar, TextStyle, showDialog;
 import 'package:get/get.dart';
 import 'package:quickai/core/constants.dart';
+import 'package:quickai/core/manager/text_style_manager.dart';
 import 'package:quickai/core/networking/request_result.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:toast/toast.dart';
@@ -95,5 +96,17 @@ bool Checkpremuimdate({required DateTime date})
   }
 
 }
+
+void showsnackbar({required String content}) {
+  ScaffoldMessenger.of(Get.context!).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.white,
+        content: Text(content,style:getRegularStyle(color: ColorsManager.burble, fontSize: width/40)),
+        duration: Duration(seconds: 3), // Set the duration for the snackbar
+      )
+  );
+
+}
+
 
 

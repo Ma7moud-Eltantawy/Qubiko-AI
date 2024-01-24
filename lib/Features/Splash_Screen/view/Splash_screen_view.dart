@@ -45,6 +45,7 @@ class Splash_screen extends StatelessWidget {
               ),
               loadingwidget(width: width, height: height),
 
+
             ],
           ),
         ),

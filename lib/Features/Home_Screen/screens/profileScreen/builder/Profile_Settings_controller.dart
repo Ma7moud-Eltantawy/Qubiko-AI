@@ -16,6 +16,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../../../core/utils/functions.dart';
+import '../../../../../data/Google_Ads.dart';
+import '../../../../../widgets/directionicon.dart';
 import '../../../../../widgets/logout_bottom_sheet.dart';
 import '../../../../payments/payment_method/view/paymentsscreenview.dart';
 import '../../../../payments/upgrade_to_pro/view/proplanscreen.dart';
@@ -62,6 +65,7 @@ class genralItemdata{
 
 class profileSettingsCpntroller extends GetxController{
 
+
   late Userdatamodel userdata;
   late List<basicsitemdata> BasicsItems;
 
@@ -71,13 +75,17 @@ class profileSettingsCpntroller extends GetxController{
     super.onInit();
 
 
+
 }
   @override
   void onReady() {
-    userdata = currentuserdata!;
+
 
     // TODO: implement onReady
     super.onReady();
+    userdata = currentuserdata!;
+
+
     print("setting_redy");
     BasicsItems=[
       basicsitemdata(
@@ -124,7 +132,7 @@ class profileSettingsCpntroller extends GetxController{
         print("object");
         update();
       },
-          traling: Icon(IconBroken.Arrow___Right_2)),
+          traling: DirectionIcon(iconcolor: Colors.black,)),
       basicsitemdata(
           textcolor: Colors.white,
           hint:AppLocalizations.of(ctx).translate("mainaccount", "profilehint"),
@@ -146,10 +154,10 @@ class profileSettingsCpntroller extends GetxController{
           ),
           title: AppLocalizations.of(ctx).translate("mainaccount", "protitle"),
           onpress: (){
-            print("object2");
+            //print("object2");
             Get.to(()=>ProPlanScreen(),transition: kTransition2,duration: kTransitionDuration);
           },
-          traling: Icon(IconBroken.Arrow___Right_2,color: Colors.white,))
+          traling: DirectionIcon(iconcolor: Colors.white,))
 
     ];
     update();
@@ -174,7 +182,7 @@ class profileSettingsCpntroller extends GetxController{
         onpress: (){
           Get.to(()=>PersonalinfoScreen(),transition: kTransition2,duration: kTransitionDuration);
         },
-        traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
+        traling: DirectionIcon(iconcolor: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.Shield_Done,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item2"),
@@ -182,7 +190,7 @@ class profileSettingsCpntroller extends GetxController{
           Get.to(()=>Securityscreen(),transition: kTransition2,duration: kTransitionDuration);
 
         },
-        traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
+        traling: DirectionIcon(iconcolor: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.Document,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item3"),
@@ -200,7 +208,7 @@ class profileSettingsCpntroller extends GetxController{
                   color: Colors.black38,
                   fontSize: Get.width/30,
                 ),),
-                Icon(IconBroken.Arrow___Right_2,color: Colors.black,),
+                DirectionIcon(iconcolor: Colors.black,)
               ],
             ))),
 
@@ -212,9 +220,11 @@ class profileSettingsCpntroller extends GetxController{
         leading: Icon(IconBroken.Paper,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item4"),
         onpress: (){
+
           Get.toNamed(HelpCebterScreen.scid);
+
         },
-        traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
+        traling: DirectionIcon(iconcolor: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.Lock,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item5"),
@@ -222,21 +232,21 @@ class profileSettingsCpntroller extends GetxController{
           Get.toNamed(Privacyscreen.scid);
 
         },
-        traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
+        traling: DirectionIcon(iconcolor: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.More_Square,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item6"),
         onpress: (){
           Get.toNamed(AboutappScreen.scid);
         },
-        traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
+        traling: DirectionIcon(iconcolor: Colors.black,)),
     genralItemdata(
         leading: Icon(IconBroken.Logout,color: Colors.black,),
         title: AppLocalizations.of(ctx).translate("mainaccount", "item7"),
         onpress: (){
           Logout_bottocheet(Get.context!,height,width);
         },
-        traling: Icon(IconBroken.Arrow___Right_2,color: Colors.black,)),
+        traling: DirectionIcon(iconcolor: Colors.black,)),
 
   ];
 

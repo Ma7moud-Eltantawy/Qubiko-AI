@@ -11,7 +11,7 @@ import 'package:lottie/lottie.dart';
 
 class Chat_screen extends StatelessWidget {
   Chat_screen({Key? key, required this.msgsdata,required this.docid,required this.searchtitle}) : super(key: key){
-    AssistantController controller = AssistantController(Msgs: msgsdata,userid: docid,searchtitle: searchtitle);
+    ChatController controller = ChatController(Msgs: msgsdata,userid: docid,searchtitle: searchtitle);
     Get.put(controller);
 
   }
@@ -32,7 +32,7 @@ class Chat_screen extends StatelessWidget {
     final size=MediaQuery.of(context).size;
     final height=size.height;
     final width=size.width;
-    return GetBuilder<AssistantController>(
+    return GetBuilder<ChatController>(
       builder:(con)=> Scaffold(
 
         appBar: AppBar(

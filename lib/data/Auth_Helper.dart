@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quickai/core/enums.dart';
 import 'package:quickai/core/manager/colors_manager.dart';
 import 'package:quickai/core/models/Userdatamodel.dart';
@@ -10,14 +11,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quickai/options/Localization_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path/path.dart' as path;
 
 import '../core/constants.dart';
+import '../core/utils/functions.dart';
 
 abstract class BaseAuthDataSource{
-  Future <void>sendOTP({required String number});
+  Future <RequestResult<String>>sendOTP({required String number});
+  Future <RequestResult>activeByphone({required String verifyid,required String smscode});
+
   Future<RequestResult<UserCredential>>SignUp({
     required String email,
     required String pass,
@@ -90,9 +95,9 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
     on FirebaseAuthException catch(e)
     {
       if (e.code == 'user-not-found') {
-        showsnackbar(content: "No user found for that email.");
+        showsnackbar(content: AppLocalizations.of(Get.context!).translate("snackbarmsg", "usernotfound"));
       } else if (e.code == 'wrong-password') {
-        showsnackbar(content: "Wrong password provided for that user.");
+        showsnackbar(content: AppLocalizations.of(Get.context!).translate("snackbarmsg", "wrongpass"));
       }
 
       return RequestResult(requestState: RequestState.failed,errorMessage: e.message);
@@ -135,33 +140,45 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
     }
   }
   @override
-  Future<void> sendOTP({required String number}) async{
-    // TODO: implement sendOTP
+  Future<RequestResult<String>> sendOTP({required String number}) async{
     FirebaseAuth auth = FirebaseAuth.instance;
-    await auth.verifyPhoneNumber(
-      phoneNumber: number,
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        // Auto-verification if the SMS code is detected automatically
-        await auth.signInWithCredential(credential);
-        print("mahmoud");
-        print(credential.smsCode);
-        // Handle successful verification
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        print("exeption $e");
-        // Handle verification failure
-      },
-      codeSent: (String verificationId, int? resendToken) {
-        // Save the verification ID and show the OTP input UI
-        // You can use the verification ID to manually enter the OTP
-        print("ver id$verificationId");
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        // Handle timeout
-        print("ver id 2$verificationId");
-      },
-    );
-  }
+     String ? _verificationId;
+    try{
+
+      await auth.verifyPhoneNumber(
+        phoneNumber: number,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // ANDROID ONLY!
+          // Sign the user in (or link) with the auto-generated credential
+          await auth.signInWithCredential(credential);
+        },
+        verificationFailed: (FirebaseAuthException error) {
+          print(error);
+        },
+        codeSent: (String verificationId, int? forceResendingToken) async {
+          print(forceResendingToken);
+          PhoneAuthCredential credential = PhoneAuthProvider.credential(
+            verificationId: verificationId,
+            smsCode: "123456",
+          );
+          _verificationId=verificationId;
+          print(credential.smsCode);
+
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          print(verificationId);
+        },
+      );
+      return RequestResult(requestState: RequestState.success,data: _verificationId);
+
+    }
+    on FirebaseException catch(e)
+    {
+      return RequestResult(requestState: RequestState.failed);
+
+
+    }
+}
 
   @override
   Future<RequestResult<RequestState>> uploaduserdata({required Userdatamodel user}) async {
@@ -246,7 +263,8 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
       bool isEmailVerified = FirebaseAuth.instance.currentUser?.emailVerified ?? false;
 
       if (!isEmailVerified) {
-       showsnackbar(content: "Email Not Verified, Please Check Your Emails");
+        showsnackbar(content: AppLocalizations.of(Get.context!).translate("snackbarmsg", "notverify"));
+
 
         // You might return a result here indicating that email is not verified.
         return RequestResult(requestState: RequestState.success,data:verifiedenum.notverify);
@@ -258,7 +276,6 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
     } catch (e) {
       // Handle errors during email verification
       print("Error during email verification: $e");
-      showsnackbar(content: "Account not found.");
       // You might return a result here indicating an error.
       return RequestResult(requestState: RequestState.failed);
     }
@@ -269,8 +286,7 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
     try{
 
      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
-
-       showsnackbar(content:"Please Check Your Emails");
+     showsnackbar(content: AppLocalizations.of(Get.context!).translate("snackbarmsg", "verifymsg"));
 
       return RequestResult(requestState: RequestState.failed,data: verifiedenum.Verify);
 
@@ -300,6 +316,25 @@ class AuthRemoteDataSource implements BaseAuthDataSource{
       print('Error sending password reset email: $e');
       // Handle the error appropriately, e.g., show a message to the user
     }
+  }
+
+  @override
+  Future<RequestResult> activeByphone({required String verifyid,required String smscode}) async{
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    try{
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verifyid,
+          smsCode: smscode,);
+      await auth.signInWithCredential(credential);
+
+      return RequestResult(requestState: RequestState.success);
+    }
+    catch(e)
+    {
+      return RequestResult(requestState: RequestState.failed);
+    }
+
   }
 
 

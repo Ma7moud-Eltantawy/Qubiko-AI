@@ -57,24 +57,25 @@ class History_Screen extends StatelessWidget {
           if (snapshot.connectionState==ConnectionState.waiting) {
             return Center(child: loadingwidget(height: height, width: width));
           }
-          if(!snapshot.hasData){
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset("assets/img/empty_history.svg"),
-                  Text(loc.translate("historysc", "emptyhint"),style: getMediumStyle(color: Colors.black54, fontSize: width/25),),
-              
-              
-                ],
-              ),
-            );
-          }
+
           else{
 
             return GetBuilder<HistoryController>(
-              builder: (con) =>ScrollConfiguration(
+              builder: (con) =>con.historyDoc.isEmpty?
+               Center(
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SvgPicture.asset("assets/img/empty_history.svg"),
+                Text(loc.translate("historysc", "emptyhint"),style: getMediumStyle(color: Colors.black54, fontSize: width/25),),
+
+
+              ],
+            ),
+          )
+
+                  :ScrollConfiguration(
                 behavior: MyBehavior(),
                 child: ListView.builder(
                   controller: con.scrollController,
@@ -88,9 +89,12 @@ class History_Screen extends StatelessWidget {
                           await con.fetchData(index);
                         },
                         child: Slidable(
+                          key:  ValueKey(index),
+
                           startActionPane: ActionPane(
                             // A motion is a widget used to control how the pane animates.
                             motion: const ScrollMotion(),
+                            dragDismissible: false,
 
                             // A pane can dismiss the Slidable.
                             dismissible: DismissiblePane(onDismissed: () {}),

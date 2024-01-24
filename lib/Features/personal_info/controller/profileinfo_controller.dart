@@ -10,12 +10,14 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quickai/data/Auth_Helper.dart';
 import 'package:quickai/data/DB_Helper.dart';
+import 'package:quickai/options/Localization_options.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../core/enums.dart';
 import '../../../core/models/Userdatamodel.dart';
 import '../../../core/networking/request_result.dart';
 import '../../../core/utils/functions.dart';
+import '../../../data/Google_Ads.dart';
 import '../../Home_Screen/home/controller/Home_screen_controller.dart';
 
 class profileinfocontrroler extends GetxController {
@@ -29,11 +31,12 @@ class profileinfocontrroler extends GetxController {
     namecon = TextEditingController();
     phonecon = TextEditingController();
     datecon = TextEditingController();
+    _adsHelper.createInterstitialAd();
   }
 
   final BaseAuthDataSource _baseAuthDataSource = AuthRemoteDataSource();
   final BaseDBhelperdatasource _baseDBhelperdatasource=RemoteDBhelperdatasource();
-
+  BaseAdsHelper _adsHelper=RemoteAdsHelper();
 
   late TextEditingController namecon;
   late TextEditingController phonecon;
@@ -140,6 +143,7 @@ class profileinfocontrroler extends GetxController {
 
       if(value.requestState==RequestState.success)
       {
+        _adsHelper.showInterstitialAd();
         await _baseAuthDataSource.Getuserdata(id: currentuserdata!.userid!).then((userdata) async {
           if(value.requestState==RequestState.success)
           {
@@ -153,10 +157,11 @@ class profileinfocontrroler extends GetxController {
       }
     });
     //Get.offAll(()=>Welcome_Screen(),transition: kTransition2,duration: kTransitionDuration);
-    showsnackbar(content: "user data updated");
+    showsnackbar(content: AppLocalizations.of(Get.context!).translate("snackbarmsg", "updateuser"));
   }
     else{
-      showsnackbar(content: "Not data Changed");
+      showsnackbar(content: AppLocalizations.of(Get.context!).translate("snackbarmsg", "notupdateuser"));
+
     }
     homecont.onReady();
     //homecont.updatedatabase();

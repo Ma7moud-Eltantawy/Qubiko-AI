@@ -34,7 +34,7 @@ class AppLocalizations {
       _localizedStrings = Map<String, dynamic>.from(jsonMap.cast<String, dynamic>());
     } catch (e) {
       print('Error loading localization: $e');
-      throw Exception('Failed to load localization data for ${locale.languageCode}');
+      throw Exception('Failed to load localization data for ${locale}');
     }
   }
 

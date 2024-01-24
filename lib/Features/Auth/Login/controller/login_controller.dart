@@ -85,6 +85,7 @@ class Login_controller extends GetxController{
       } else {
 
         await _remmoteDataSource.logout();
+        await _dBhelperdatasource.removeuserdata();
         changeLoadingValue();
         return;
       }

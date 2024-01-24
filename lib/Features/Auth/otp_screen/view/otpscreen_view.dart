@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickai/core/manager/text_style_manager.dart';
+import '../../../../core/manager/colors_manager.dart';
 import '../../../../core/styles/Local_Styles.dart';
 import '../../../../core/styles/icons.dart';
-import '../../../core/manager/colors_manager.dart';
-import '../../../options/Localization_options.dart';
+import '../../../../options/Localization_options.dart';
+
 import '../controller/otp_controller.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -92,7 +93,8 @@ class OtpScreen extends StatelessWidget {
                         Text(
                             "${loc.translate(scid, "timecode")}",
 
-                            style: getRegularStyle(color: Colors.black54, fontSize: width/22)
+                            style: getRegularStyle(color: Colors.black54, fontSize: width/22),
+
                         ),
                       ],
                     ),

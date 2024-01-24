@@ -129,7 +129,13 @@ class RemoteDBhelperdatasource implements BaseDBhelperdatasource{
     try{
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String? langdata=await prefs.getString('lang');
-      return RequestResult(requestState: RequestState.success,data:langdata);
+      if(langdata==null){
+        return RequestResult(requestState: RequestState.failed);
+      }
+      else{
+        return RequestResult(requestState: RequestState.success,data:langdata);
+      }
+
     }
     catch(e)
     {

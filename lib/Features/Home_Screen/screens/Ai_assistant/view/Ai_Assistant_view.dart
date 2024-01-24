@@ -4,28 +4,31 @@ import 'package:quickai/Features/Home_Screen/screens/Ai_assistant/view/Ai_Assist
 import 'package:quickai/Features/Home_Screen/screens/Chat_Screen/Chat/view/chat_view.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/manager/colors_manager.dart';
+import 'package:quickai/data/Google_Ads.dart';
+import 'package:quickai/options/Localization_options.dart';
 import 'package:quickai/widgets/scroll_behavior.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 class AI_Assistant_Screen extends StatelessWidget {
-  const AI_Assistant_Screen({Key? key}) : super(key: key);
-
-
+   AI_Assistant_Screen({Key? key}) : super(key: key);
+  static const scid="/AI_Assistant_Screen";
+  Ai_Assistant_controller controller=Get.find();
 
 
   @override
   Widget build(BuildContext context) {
-    Ai_Assistant_controller controller=Get.put(Ai_Assistant_controller());
+
     var size=MediaQuery.of(context).size;
     var width=size.width;
     var height=size.height;
+    var loc=AppLocalizations.of(context);
 
     return GetBuilder<Ai_Assistant_controller>(
       builder:(con)=> Scaffold(
         appBar: AppBar(
-          title: Text("AI Assistants"),
+          title: Text(loc.translate("apphomescs", "sc2")),
           leading: Container(
             padding: EdgeInsets.all(width/40),
 
@@ -161,7 +164,6 @@ class category_item_view extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        print("object");
         Get.to(()=>Chat_screen(msgsdata: [], docid: "", searchtitle:currentitemdata.Searchtitle,),transition: kTransition2,duration: kTransitionDuration);
       },
 
@@ -176,7 +178,7 @@ class category_item_view extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(currentitemdata.img,height: height/12,width: width/6,fit: BoxFit.fill,),
+            Image.asset(currentitemdata.img,height: height/18,width: height/18,fit: BoxFit.fill,),
             SizedBox(height: height/50,),
             Text(currentitemdata.title,style: TextStyle(
               fontSize: width/22,

@@ -22,7 +22,6 @@ import '../../../data/Google_Ads.dart';
 class Splash_controller extends GetxController{
 
   BaseDBhelperdatasource _baseDBhelperdatasource=RemoteDBhelperdatasource();
-  final BaseAdsHelper adsHelper = RemoteAdsHelper();
   final BaseAuthDataSource baseAuthDataSource = AuthRemoteDataSource();
 
 
@@ -35,9 +34,9 @@ class Splash_controller extends GetxController{
         testDeviceIds: [
           Platform.isAndroid ? AdIdhelper.androidAppId : AdIdhelper.iosAppId
         ]));
-    await adsHelper.createInterstitialAd();
-    Future.delayed(Duration(seconds: 3)).then((value){
-      Navigator();
+
+    Future.delayed(Duration(seconds: 7)).then((value) async {
+     await Navigator();
 
     });
 
@@ -55,62 +54,68 @@ class Splash_controller extends GetxController{
     _baseDBhelperdatasource.OnBoardingseencheck().then((onboardstate) {
       if(onboardstate.data==Onboardseenenum.Seen)
         {
-          if(currentuserdata==null) {
+
 
             _baseDBhelperdatasource.getuserfromDB().then((dbuser) async {
-              bool checkIsprem = currentuserdata!.Premiun!;
-              print("is prem: $checkIsprem");
-              if (checkIsprem) {
-                bool checkpremdate = Checkpremuimdate(
-                    date: DateTime.parse(currentuserdata!.premuimtodate!));
-                if (!checkpremdate) {
-                  await baseAuthDataSource.uploaduserdata(
-                      user: Userdatamodel(
-                          email: currentuserdata!.email!,
-                          userid: currentuserdata!.userid!,
-                          name: currentuserdata!.name!,
-                          phone: currentuserdata!.phone!,
-                          pic: currentuserdata!.pic!,
-                          verified: currentuserdata!.verified!,
-                          Premiun: false,
-                          premuimtodate: "",
-                          Premuimplan: PaymentPLAN.free.toString(),
-                          DateofBirth: currentuserdata!.DateofBirth!
-                      )).then((value) async {
-                    if (value.requestState == RequestState.success) {
-                      await baseAuthDataSource.Getuserdata(id: currentuserdata!
-                          .userid!).then((userdata) async {
-                        if (value.requestState == RequestState.success) {
-                          await _baseDBhelperdatasource.SaveuserinDB(
-                              user: userdata.data!);
-                          await _baseDBhelperdatasource.getuserfromDB();
-                        }
-                      });
-                    }
-                  });
+              if(currentuserdata!=null) {
+
+                bool checkIsprem = currentuserdata!.Premiun!;
+                print("is prem: $checkIsprem");
+                if (checkIsprem) {
+                  bool checkpremdate = Checkpremuimdate(
+                      date: DateTime.parse(currentuserdata!.premuimtodate!));
+                  if (!checkpremdate) {
+                    await baseAuthDataSource.uploaduserdata(
+                        user: Userdatamodel(
+                            email: currentuserdata!.email!,
+                            userid: currentuserdata!.userid!,
+                            name: currentuserdata!.name!,
+                            phone: currentuserdata!.phone!,
+                            pic: currentuserdata!.pic!,
+                            verified: currentuserdata!.verified!,
+                            Premiun: false,
+                            premuimtodate: "",
+                            Premuimplan: PaymentPLAN.free.toString(),
+                            DateofBirth: currentuserdata!.DateofBirth!
+                        )).then((value) async {
+                      if (value.requestState == RequestState.success) {
+                        await baseAuthDataSource.Getuserdata(id: currentuserdata!
+                            .userid!).then((userdata) async {
+                          if (value.requestState == RequestState.success) {
+                            await _baseDBhelperdatasource.SaveuserinDB(
+                                user: userdata.data!);
+                            await _baseDBhelperdatasource.getuserfromDB();
+                          }
+                        });
+                      }
+                    });
+                  }
                 }
-              }
+                if (dbuser.requestState == RequestState.success) {
+                  Get.off(() => Home_screen(), transition: kTransition2,
+                      duration: Duration(seconds: 1));
 
+                }
+                else {
+                  print("db null");
+                  Get.off(() => Welcome_Screen(), transition: kTransition2,
+                      duration: Duration(seconds: 1));
+                }
 
-              if (dbuser.requestState == RequestState.success) {
-                Get.off(() => Home_screen(), transition: kTransition2,
-                    duration: Duration(seconds: 1));
-                adsHelper.showInterstitialAd();
               }
               else {
-                print("db null");
+                print("currentuserdata null");
                 Get.off(() => Welcome_Screen(), transition: kTransition2,
                     duration: Duration(seconds: 1));
               }
-            });
-          }
-          else {
-            print("currentuserdata null");
-            Get.off(() => Welcome_Screen(), transition: kTransition2,
-                duration: Duration(seconds: 1));
-          }
 
-        }
+
+
+
+
+
+            });}
+
       else{
         Get.off(()=>onBoarding_Screen(),transition: kTransition2,duration:Duration(seconds: 1));
 

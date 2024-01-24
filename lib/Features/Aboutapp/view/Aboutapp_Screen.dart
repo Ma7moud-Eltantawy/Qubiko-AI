@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/manager/text_style_manager.dart';
 import 'package:quickai/core/styles/icons.dart';
+import '../../../main.dart';
 import '../../../options/Localization_options.dart';
+import '../../../widgets/directionicon.dart';
 import '../controller/aboutapp_controller.dart';
 
 
@@ -42,7 +44,7 @@ class AboutappScreen extends StatelessWidget {
                       return ListTile(
                         title: Text(item.title),
                         onTap: ()=>item.onpress(),
-                        trailing: Icon(IconBroken.Arrow___Right_2),
+                        trailing: DirectionIcon(iconcolor: Colors.black,),
                       );
                     },
                     separatorBuilder: (context,index)=>SizedBox(height: height/1500,),
@@ -54,3 +56,4 @@ class AboutappScreen extends StatelessWidget {
     );
   }
 }
+

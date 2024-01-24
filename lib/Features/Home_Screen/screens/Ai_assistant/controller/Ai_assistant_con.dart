@@ -2,6 +2,9 @@ import 'package:quickai/options/Localization_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/utils/functions.dart';
+import '../../../../../data/Google_Ads.dart';
+
 
 class CategoryItem {
   final String img;
@@ -19,13 +22,13 @@ class CategoryItem {
   });
 }
 class Ai_Assistant_controller extends GetxController with GetSingleTickerProviderStateMixin {
-
+  BaseAdsHelper ads=RemoteAdsHelper();
   static BuildContext ctx=Get.context!;
 
 
   Map<String, List<CategoryItem>>? usedItems;
   Map<String, List<CategoryItem>> allItems = {
-    "Writing": [
+    AppLocalizations.of(ctx).translate("aicategories", "cat2"): [
       CategoryItem(
           img: "assets/img/article.png",
           title: AppLocalizations.of(ctx).translate("Writing", "title1"),
@@ -40,7 +43,7 @@ class Ai_Assistant_controller extends GetxController with GetSingleTickerProvide
 
   onPressed: () {})
     ],
-    "Creative": [
+    AppLocalizations.of(ctx).translate("aicategories", "cat3"): [
       CategoryItem(
           img: "assets/img/storry teller.png",
           title: AppLocalizations.of(ctx).translate("Creative", "title1"),
@@ -54,7 +57,7 @@ class Ai_Assistant_controller extends GetxController with GetSingleTickerProvide
           Searchtitle:AppLocalizations.of(ctx).translate("Creative", "serchtitle2"),
           onPressed: () {})
     ],
-    "Business": [
+    AppLocalizations.of(ctx).translate("aicategories", "cat4"): [
       CategoryItem(
           img: "assets/img/emailassistant.png",
           title: AppLocalizations.of(ctx).translate("Business", "title1"),
@@ -68,21 +71,21 @@ class Ai_Assistant_controller extends GetxController with GetSingleTickerProvide
           Searchtitle:AppLocalizations.of(ctx).translate("Business", "serchtitle2"),
           onPressed: () {})
     ],
-    "Social Media": [
+    AppLocalizations.of(ctx).translate("aicategories", "cat5"): [
       CategoryItem(
-          img: "assets/img/instaassitant.png",
+          img: "assets/img/linkedinass.png",
           title: AppLocalizations.of(ctx).translate("Social Media", "title1"),
           hint: AppLocalizations.of(ctx).translate("Social Media", "hint1"),
           Searchtitle:AppLocalizations.of(ctx).translate("Social Media", "serchtitle1"),
           onPressed: () {}),
       CategoryItem(
-          img: "assets/img/linkedinass.png",
+          img: "assets/img/instaassitant.png",
           title: AppLocalizations.of(ctx).translate("Social Media", "title2"),
           hint: AppLocalizations.of(ctx).translate("Social Media", "hint2"),
           Searchtitle:AppLocalizations.of(ctx).translate("Social Media", "serchtitle2"),
           onPressed: () {})
     ],
-    "Developer": [
+    AppLocalizations.of(ctx).translate("aicategories", "cat6"): [
       CategoryItem(
           img: "assets/img/write code.png",
           title: AppLocalizations.of(ctx).translate("Developer", "title1"),
@@ -96,7 +99,7 @@ class Ai_Assistant_controller extends GetxController with GetSingleTickerProvide
           Searchtitle:AppLocalizations.of(ctx).translate("Developer", "serchtitle2"),
           onPressed: () {})
     ],
-    "Personal": [
+    AppLocalizations.of(ctx).translate("aicategories", "cat7"): [
       CategoryItem(
           img: "assets/img/birthday.png",
           title: AppLocalizations.of(ctx).translate("Personal", "title1"),
@@ -110,7 +113,7 @@ class Ai_Assistant_controller extends GetxController with GetSingleTickerProvide
           Searchtitle:AppLocalizations.of(ctx).translate("Personal", "serchtitle2"),
           onPressed: () {})
     ],
-    "Others": [
+    AppLocalizations.of(ctx).translate("aicategories", "cat8"): [
       CategoryItem(
           img: "assets/img/creativeconversation.png",
           title: AppLocalizations.of(ctx).translate("Others", "title1"),
@@ -133,7 +136,16 @@ class Ai_Assistant_controller extends GetxController with GetSingleTickerProvide
 
   late TabController controller;
   List<String> assistant_cat=[
-    "All","Writing","Creative","Business","Social Media","Developer","Personal","Others"
+    AppLocalizations.of(ctx).translate("aicategories", "cat1"),
+    AppLocalizations.of(ctx).translate("aicategories", "cat2"),
+    AppLocalizations.of(ctx).translate("aicategories", "cat3"),
+    AppLocalizations.of(ctx).translate("aicategories", "cat4"),
+    AppLocalizations.of(ctx).translate("aicategories", "cat5"),
+    AppLocalizations.of(ctx).translate("aicategories", "cat6"),
+    AppLocalizations.of(ctx).translate("aicategories", "cat7"),
+    AppLocalizations.of(ctx).translate("aicategories", "cat8"),
+
+
   ];
   int assistant_pos=0;
 
@@ -159,7 +171,7 @@ class Ai_Assistant_controller extends GetxController with GetSingleTickerProvide
 
 
   void changeuseditem({required String collection}) {
-    if(collection=="All")
+    if(collection==AppLocalizations.of(ctx).translate("aicategories", "cat1"))
       {
         usedItems = allItems;
         update();

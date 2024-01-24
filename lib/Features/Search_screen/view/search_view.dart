@@ -18,6 +18,8 @@ import 'package:quickai/widgets/search_textfield.dart';
 import 'package:quickai/widgets/textfield.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../widgets/directionicon.dart';
+
 class SearchScreenView extends StatelessWidget {
   final Searchscreencontroller controller = Get.put(Searchscreencontroller());
 
@@ -41,8 +43,8 @@ class SearchScreenView extends StatelessWidget {
 
                   child: IconButton(
 
-                    icon: Icon(IconBroken.Arrow___Left_2),
-                    onPressed: (){
+                    icon:Directionality.of(context)==TextDirection.rtl?Icon(IconBroken.Arrow___Right_2):Icon(IconBroken.Arrow___Left_2,),
+            onPressed: (){
                       Get.back();
                     },
                   ),

@@ -12,7 +12,9 @@ import 'package:uuid/uuid.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../../../core/entities/msg.dart';
+import '../../../../../../core/utils/functions.dart';
 import '../../../../../../data/Google_Ads.dart';
+import '../../../../../../options/Localization_options.dart';
 
 class MsgData {
   MsgData({required this.sendByMe, required this.msgTxt});
@@ -20,7 +22,7 @@ class MsgData {
   final String msgTxt;
 }
 
-class AssistantController extends GetxController {
+class ChatController extends GetxController {
   final TextEditingController msgController = TextEditingController();
   late List<msg_model>  msgs ;
   BaseChatGptDataSource baseChatGptDataSource = RemoteChatGptDataSource();
@@ -34,13 +36,13 @@ class AssistantController extends GetxController {
 
 
   // Factory constructor
-  factory AssistantController({required List<msg_model> Msgs,required String userid,required String searchtitle}) {
-    return AssistantController._(Msgs: Msgs,userid: userid,searchtitle: searchtitle);
+  factory ChatController({required List<msg_model> Msgs,required String userid,required String searchtitle}) {
+    return ChatController._(Msgs: Msgs,userid: userid,searchtitle: searchtitle);
 
   }
 
   // Private constructor
-  AssistantController._({required this.Msgs,required this.userid,required this.searchtitle});
+  ChatController._({required this.Msgs,required this.userid,required this.searchtitle});
 
 
 
@@ -145,8 +147,13 @@ class AssistantController extends GetxController {
   }
   void copyToClipboard(int index) {
     Clipboard.setData(ClipboardData(text: msgs[index].textmsg));
-    showsnackbar(content: "Text copied to clipboard");
+
+    showsnackbar(content: AppLocalizations.of(Get.context!).translate("snackbarmsg", "copy"));
+
   }
+
+
+
   Future<void> sharemsgto(int index) async {
     await Share.share('check out my website https://example.com');
 

@@ -25,13 +25,13 @@ class Onboarding_controller extends GetxController{
         text_info: "Lorem ipsum dolor sit amet, consectetur \n adipiscing elit, sed do eiusmod tempor...",
         is_last: false),
     Pageviewmodel(
-        Backgroundimg:"assets/img/board1.png" ,
-        title:"The Best Unparalleled Conversational Brilliance" ,
+        Backgroundimg:"assets/img/board2.png" ,
+        title:"Harness the Power of AI Assistants for Productivity" ,
         text_info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...",
         is_last: false),
     Pageviewmodel(
-        Backgroundimg:"assets/img/board1.png" ,
-        title:"The Best Unparalleled Conversational Brilliance" ,
+        Backgroundimg:"assets/img/board3.png" ,
+        title:"Diverse AI Helpers to Revolutionize Your Tasks" ,
         text_info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...",
         is_last: false),
 

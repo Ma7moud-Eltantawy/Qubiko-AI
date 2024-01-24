@@ -2,6 +2,8 @@ import 'package:quickai/core/models/His_model.dart';
 import 'package:quickai/core/styles/icons.dart';
 import 'package:flutter/material.dart';
 
+import 'directionicon.dart';
+
 class Histoty_item_model extends StatelessWidget {
   const Histoty_item_model({
     super.key,
@@ -29,8 +31,7 @@ class Histoty_item_model extends StatelessWidget {
         title: Container(child: Text(data.title,
           maxLines: 1,overflow:TextOverflow.ellipsis ,style: TextStyle(fontSize: width/30,fontWeight: FontWeight.w900),),),
         subtitle:Text(data.timestamp,style: TextStyle(fontSize: width/40,color: Colors.black38,fontWeight: FontWeight.w900)),
-        trailing: Icon(IconBroken.Arrow___Right_2),
-      ),
+        trailing: DirectionIcon(iconcolor: Colors.black,)),
     );
   }
 }

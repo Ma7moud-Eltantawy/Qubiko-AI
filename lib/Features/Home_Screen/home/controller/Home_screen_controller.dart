@@ -6,16 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickai/data/DB_Helper.dart';
 
+import '../../../../data/Google_Ads.dart';
 import '../../screens/profileScreen/builder/Profile_Settings_controller.dart';
 
 class home_Sreen_controller extends GetxController{
-
   profileSettingsCpntroller profcon=Get.put(profileSettingsCpntroller());
   @override
   void onReady() {
     // TODO: implement onReady
     super.onReady();
     update();
+
 
   }
   BaseDBhelperdatasource _baseDBhelperdatasource=RemoteDBhelperdatasource();

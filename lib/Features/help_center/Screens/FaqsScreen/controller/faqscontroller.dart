@@ -39,7 +39,11 @@ class FaqsController extends GetxController
   int ?isTapped;
 
   List<String> assistant_cat=[
-    "All","Genral","Account","Service","Chatbot",
+    AppLocalizations.of(Get.context!).translate("faqscat", "cat1"),
+    AppLocalizations.of(Get.context!).translate("faqscat", "cat2"),
+    AppLocalizations.of(Get.context!).translate("faqscat", "cat3"),
+    AppLocalizations.of(Get.context!).translate("faqscat", "cat4"),
+
   ];
   List<Faqitem> Faqsitemslist = [
     Faqitem(

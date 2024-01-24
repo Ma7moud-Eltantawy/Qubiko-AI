@@ -4,6 +4,7 @@ import 'package:quickai/Features/Auth/Sign_up/view/Signup_screen_view.dart';
 import 'package:quickai/Features/hello_page/view/hello_screen.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/manager/colors_manager.dart';
+import 'package:quickai/options/Localization_options.dart';
 import 'package:quickai/widgets/material_button.dart';
 import 'package:quickai/widgets/my_ivon_button.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class Welcome_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     var height=MediaQuery.of(context).size.height;
     var width=MediaQuery.of(context).size.width;
+    var loc=AppLocalizations.of(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -36,7 +38,7 @@ class Welcome_Screen extends StatelessWidget {
 
               Center(
                 child: Text(
-                  'Welcome to \n Qubiko AI 👋',
+                 loc.translate("wlcomesc", "title"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: width/14,
@@ -48,11 +50,11 @@ class Welcome_Screen extends StatelessWidget {
               SizedBox(height: height/15,),
               materialbutton(height: height, width: width,colors: [ColorsManager.burble,ColorsManager.purble2],onpress: (){
                 Get.to(()=>Login_screen(),transition: kTransition2,duration: kTransitionDuration);
-              },text: "Log in",textcolor: ColorsManager.white,),
+              },text: loc.translate("wlcomesc", "but1"),textcolor: ColorsManager.white,),
               materialbutton(height: height, width: width,colors: [ColorsManager.white,ColorsManager.white],onpress: (){
                 Get.to(()=>Signup_Screen(),transition: kTransition2,duration: kTransitionDuration);
 
-              },text: "Sign up",textcolor: ColorsManager.burble,),
+              },text: loc.translate("wlcomesc", "but2"),textcolor: ColorsManager.burble,),
               SizedBox(height: height/12,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +66,7 @@ class Welcome_Screen extends StatelessWidget {
                   ),),
 
                   SizedBox(width: width/3,
-                  child:Text(" or continue with ",textAlign: TextAlign.center,style: TextStyle(
+                  child:Text(loc.translate("wlcomesc", "contwith"),textAlign: TextAlign.center,style: TextStyle(
                     color: Colors.black54,
                     fontSize: width/30
                   ),),

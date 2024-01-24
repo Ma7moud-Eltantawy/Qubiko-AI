@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
+import 'package:quickai/core/enums.dart';
 import 'package:quickai/options/Localization_options.dart';
+
+import '../../../data/Google_Ads.dart';
 class Aboutitem{
   String title;
   Function onpress;
@@ -7,6 +10,7 @@ class Aboutitem{
 
 }
 class AboutappController extends GetxController{
+  BaseAdsHelper _adsHelper=RemoteAdsHelper();
 
   List<Aboutitem> Aboutappitemlist=[
     Aboutitem(title: AppLocalizations.of(Get.context!).translate("aboutsc", "title0"), onpress:(){}),
@@ -20,6 +24,18 @@ class AboutappController extends GetxController{
     Aboutitem(title: AppLocalizations.of(Get.context!).translate("aboutsc", "title8"), onpress:(){}),
 
   ];
+@override
+  Future<void> onReady() async {
+    // TODO: implement onReady
+    super.onReady();
+    print("object");
+    await _adsHelper.createInterstitialAd().then((value){
+      if(value.requestState==RequestState.success)
+        {
+          _adsHelper.showInterstitialAd();
+        }
+    });
 
+  }
 
 }
