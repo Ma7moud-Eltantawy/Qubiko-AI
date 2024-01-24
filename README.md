@@ -1,4 +1,4 @@
-# Flutter Chatbot Application
+# Quicko_Ai Application
 
 This Flutter application features a chatbot with various functionalities, including API integration, state management using GetX, and integration with two popular payment gateways: Stripe and PayPal. Additionally, the app incorporates Google Ads for monetization, Firebase authentication for user verification via both phone and Gmail, and supports localization for two languages: Arabic and English.
 
