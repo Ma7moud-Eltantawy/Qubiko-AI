@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickai/core/styles/icons.dart';
 import 'package:quickai/options/Localization_options.dart';
+
+import '../../../../../core/utils/sizeconfig.dart';
 class Home_screen extends StatelessWidget {
   const Home_screen({Key? key}) : super(key: key);
   @override
@@ -15,9 +17,9 @@ class Home_screen extends StatelessWidget {
       builder:(con) =>Scaffold(
         body:FutureBuilder<void>(
           future: con.updatedatabase(),
-          builder:(context,snapshot)=>con.Screen_view[con.pageposition] ,
+          builder:(context,snapshot)=>con.Screen_view[con.pageposition.value] ,
         )  ,
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar:MediaQuery.sizeOf(context).width<SizeConfig.tabletBreakPoint? BottomNavigationBar(
 
           items: [
             BottomNavigationBarItem(
@@ -38,13 +40,13 @@ class Home_screen extends StatelessWidget {
               label: loc.translate("apphomescs", "sc4"),
             ),
           ],
-          currentIndex: con.pageposition,
+          currentIndex: con.pageposition.value,
           onTap:(index){
 
             con.changePagePosition(index);
 
           },
-        ),
+        ):null,
       ),
     );
   }

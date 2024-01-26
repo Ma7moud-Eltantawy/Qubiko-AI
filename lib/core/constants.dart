@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:quickai/core/enums.dart';
 import 'package:quickai/core/manager/colors_manager.dart';
 import 'package:quickai/core/models/Userdatamodel.dart';
+import 'package:quickai/core/utils/sizeconfig.dart';
 import '../options/Localization_options.dart';
 import 'entities/proplanitems.dart';
 

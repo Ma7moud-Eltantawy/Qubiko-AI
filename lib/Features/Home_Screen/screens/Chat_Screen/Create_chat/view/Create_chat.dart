@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../../core/utils/functions.dart';
+import '../../../../../../core/utils/sizeconfig.dart';
 import '../../../../../../data/Google_Ads.dart';
 class Create_chat extends StatelessWidget {
   const Create_chat({Key? key}) : super(key: key);
@@ -18,15 +19,14 @@ class Create_chat extends StatelessWidget {
   Widget build(BuildContext context) {
     Ai_Assistant_controller controller=Get.put(Ai_Assistant_controller());
     var loc=AppLocalizations.of(context);
-    var size=MediaQuery.of(context).size;
-    var width=size.width;
-    var height=size.height;
+    var Width=Get.size.width<SizeConfig.tabletBreakPoint?Get.width:Get.width*.75;
+
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Qubiko AI "),
         leading: Container(
-            padding: EdgeInsets.all(width/25),
+            padding: EdgeInsets.all(Width/25),
 
             child: SvgPicture.asset("assets/img/logo.svg"),),
       ),
@@ -37,13 +37,13 @@ class Create_chat extends StatelessWidget {
 
           Container(
             height: height/5,
-            width: width,
+            width: Width,
             color: Colors.transparent,
 
             child: SvgPicture.asset("assets/img/logo.svg"),),
           SizedBox(height: height/30,),
           Text(loc.translate("createchat", "title"),style: TextStyle(
-            fontSize: width/12,
+            fontSize: Width/12,
 
             fontWeight: FontWeight.bold
           ),),
@@ -51,13 +51,13 @@ class Create_chat extends StatelessWidget {
           Text(loc.translate("createchat", "hint"),
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: width/24,
+              fontSize: Width/24,
 
               fontWeight: FontWeight.w300
           ),),
           SizedBox(height: height/20
           ),
-          materialbutton(height: height, width: width,colors: [ColorsManager.burble,ColorsManager.purble2],onpress: (){
+          materialbutton(height: height, width: Width,colors: [ColorsManager.burble,ColorsManager.purble2],onpress: (){
 
 
 

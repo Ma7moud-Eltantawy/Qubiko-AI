@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:quickai/Features/Aboutapp/view/Aboutapp_Screen.dart';
 import 'package:quickai/Features/Privacy&policy/view/privacyscreen.dart';
@@ -17,6 +18,7 @@ import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../../core/utils/functions.dart';
+import '../../../../../core/utils/sizeconfig.dart';
 import '../../../../../data/Google_Ads.dart';
 import '../../../../../widgets/directionicon.dart';
 import '../../../../../widgets/logout_bottom_sheet.dart';
@@ -64,10 +66,14 @@ class genralItemdata{
 
 
 class profileSettingsCpntroller extends GetxController{
+ 
+
 
 
   late Userdatamodel userdata;
   late List<basicsitemdata> BasicsItems;
+
+  var Width=Get.size.width<SizeConfig.tabletBreakPoint?Get.width:Get.width*.75;
 
 @override
   void onInit() {
@@ -99,14 +105,14 @@ class profileSettingsCpntroller extends GetxController{
               placeholder: (context, url) => Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.burble,
-                  strokeWidth: Get.width / 200,
+                  strokeWidth: Width / 200,
                 ),
               ),
               errorWidget: (context, url, error) => Container(
-                padding: EdgeInsets.all(Get.width / 120),
+                padding: EdgeInsets.all(Width / 120),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(width: Get.width / 300, color: ColorsManager.burble),
+                  border: Border.all(width:Width / 300, color: ColorsManager.burble),
                 ),
                 child: Icon(
                   Icons.error,
@@ -115,7 +121,7 @@ class profileSettingsCpntroller extends GetxController{
               ),
               imageBuilder: (context, imageProvider) => Container(
                 height: Get.height/7,
-                width: Get.width/4,
+                width: Width/4,
                 decoration: BoxDecoration(
 
                   shape: BoxShape.circle,
@@ -143,7 +149,7 @@ class profileSettingsCpntroller extends GetxController{
             ColorsManager.purble2
           ],
           leading: Container(
-            height:Get.height/15,width: Get.width/5,
+            height:Get.height/15,width: Width/5,
             decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/img/propic.png"),
@@ -198,7 +204,7 @@ class profileSettingsCpntroller extends GetxController{
           Get.toNamed(Language_screen.scid);
         },
         traling: Container(
-            width: Get.width/3,
+            width: (Get.size.width<SizeConfig.tabletBreakPoint?Get.width:Get.width*.75)/3,
 
 
             child: Row(
@@ -206,7 +212,7 @@ class profileSettingsCpntroller extends GetxController{
               children: [
                 Text(AppLocalizations.of(ctx).translate("languagesc", "lang"),style: TextStyle(
                   color: Colors.black38,
-                  fontSize: Get.width/30,
+                  fontSize: (Get.size.width<SizeConfig.tabletBreakPoint?Get.width:Get.width*.75)/30,
                 ),),
                 DirectionIcon(iconcolor: Colors.black,)
               ],

@@ -67,6 +67,7 @@ dependencies:
   share_plus: ^7.2.1
   flutter_slidable: ^3.0.1
   bottom_sheet: ^4.0.0
+  device_preview: ^1.1.0
 
 dev_dependencies:
 

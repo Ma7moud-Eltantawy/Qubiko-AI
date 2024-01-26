@@ -7,7 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:quickai/Features/Aboutapp/view/Aboutapp_Screen.dart';
 import 'package:quickai/Features/Auth/Login/view/Login_screen.dart';
 import 'package:quickai/Features/Auth/profile_screen/view/profile_screen.dart';
-import 'package:quickai/Features/Home_Screen/home/view/Home_Screen_view.dart';
+import 'package:quickai/Features/Home_Screen/home/presentation/view/home_layout_detect.dart';
 import 'package:quickai/Features/Home_Screen/screens/Ai_assistant/view/Ai_Assistant_view.dart';
 import 'package:quickai/Features/Home_Screen/screens/Chat_Screen/Chat/view/chat_view.dart';
 import 'package:quickai/Features/Home_Screen/screens/History_Screen/view/History_view.dart';
@@ -44,6 +44,8 @@ import 'core/theme/theme.dart';
 import 'data/Google_Ads.dart';
 import 'options/Binding.dart';
 import 'options/Localization_options.dart';
+import 'package:device_preview/device_preview.dart';
+
 
 
 Future<void> main() async {
@@ -61,7 +63,6 @@ Future<void> main() async {
 
   runApp(
 
-
        FutureBuilder(
            future: controller.getlangfromdb() ,
            builder: (context,snapshot){
@@ -72,7 +73,7 @@ Future<void> main() async {
              else{return Container();
              }
 
-             })
+             }),
 
   );
 }
@@ -92,6 +93,7 @@ class MyApp extends StatelessWidget {
 
        getPages: [
          GetPage(name: AI_Assistant_Screen.scid, page: () => AI_Assistant_Screen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
+         GetPage(name: HomepageLayout.scid, page: () => HomepageLayout(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
 
          GetPage(name: Splash_screen.scid, page: () => Splash_screen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),
          GetPage(name: HelpCebterScreen.scid, page: () => HelpCebterScreen(),transitionDuration:kTransitionDuration,transition: kTransition2,binding:HomeBinding()),

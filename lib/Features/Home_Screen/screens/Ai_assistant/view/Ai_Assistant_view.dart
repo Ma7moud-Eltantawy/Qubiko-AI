@@ -11,6 +11,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../../../../core/utils/sizeconfig.dart';
 class AI_Assistant_Screen extends StatelessWidget {
    AI_Assistant_Screen({Key? key}) : super(key: key);
   static const scid="/AI_Assistant_Screen";
@@ -19,10 +21,8 @@ class AI_Assistant_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var Width=Get.size.width<SizeConfig.tabletBreakPoint?Get.width:Get.width*.75;
 
-    var size=MediaQuery.of(context).size;
-    var width=size.width;
-    var height=size.height;
     var loc=AppLocalizations.of(context);
 
     return GetBuilder<Ai_Assistant_controller>(
@@ -30,13 +30,13 @@ class AI_Assistant_Screen extends StatelessWidget {
         appBar: AppBar(
           title: Text(loc.translate("apphomescs", "sc2")),
           leading: Container(
-            padding: EdgeInsets.all(width/40),
+            padding: EdgeInsets.all(Width/40),
 
               child: SvgPicture.asset("assets/img/logo.svg")),
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(height/12),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: width/40),
+              padding: EdgeInsets.symmetric(horizontal: Width/40),
               height: height/18,
               child: ScrollConfiguration(
                 behavior: MyBehavior(),
@@ -49,10 +49,10 @@ class AI_Assistant_Screen extends StatelessWidget {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: width/22),
+                      padding: EdgeInsets.symmetric(horizontal: Width/22),
                       height: height/18,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(width/15),
+                        borderRadius: BorderRadius.circular(Width/15),
                         gradient: con.assistant_pos==index?LinearGradient(colors: [
                           ColorsManager.burble,
                           Color.fromRGBO(105, 114, 240, 1),
@@ -61,11 +61,11 @@ class AI_Assistant_Screen extends StatelessWidget {
                           ColorsManager.white,
 
                         ]),
-                        border: Border.all(width: width/350,color: Color.fromRGBO(224, 231, 242, 1)),
+                        border: Border.all(width: Width/350,color: Color.fromRGBO(224, 231, 242, 1)),
                       ),
                       child: Text(con.assistant_cat[index],style: TextStyle(
                         color: con.assistant_pos==index?Colors.white:Colors.black,
-                        fontSize: width/25,
+                        fontSize: Width/25,
                         fontWeight: FontWeight.w400,
                       ),),
                     ),
@@ -83,12 +83,12 @@ class AI_Assistant_Screen extends StatelessWidget {
           child: SingleChildScrollView(
 
             child:Padding(
-              padding: EdgeInsets.symmetric(horizontal: width/40,vertical: height/150),
+              padding: EdgeInsets.symmetric(horizontal: Width/40,vertical: height/150),
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
 
-                  itemBuilder: (BuildContext context, int index) => items_view(width: width,
+                  itemBuilder: (BuildContext context, int index) => items_view(width: Width,
                       height: height,listname: con.usedItems?.keys.toList()[index] as String,
                   itemsdata: con.usedItems![con.usedItems?.keys.toList()[index]] as List<CategoryItem>,
                   ),
@@ -181,7 +181,9 @@ class category_item_view extends StatelessWidget {
             Image.asset(currentitemdata.img,height: height/18,width: height/18,fit: BoxFit.fill,),
             SizedBox(height: height/50,),
             Text(currentitemdata.title,style: TextStyle(
-              fontSize: width/22,
+
+              overflow: TextOverflow.ellipsis,
+              fontSize: width/30,
               fontWeight: FontWeight.w600
             ),),
             SizedBox(height: height/50,),

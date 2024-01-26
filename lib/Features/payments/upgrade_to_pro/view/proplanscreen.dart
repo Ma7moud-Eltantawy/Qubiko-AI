@@ -38,7 +38,7 @@ class ProPlanScreen extends StatelessWidget {
                       borderRadius: BorderRadius.vertical(top: Radius.circular(width/50))
                     ),
               
-                          height: height/7,
+                          height: height/6,
                           width: width,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

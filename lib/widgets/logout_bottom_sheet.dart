@@ -56,7 +56,7 @@ void Logout_bottocheet(@required BuildContext context,@required double height,@r
                 ),
                 Padding(
                   padding:  EdgeInsets.only(
-                    top: height/40,
+                    top: height/50,
                     //bottom: height/2,
                   ),
                   child: Column(
@@ -70,7 +70,7 @@ void Logout_bottocheet(@required BuildContext context,@required double height,@r
                             Expanded(
                               flex: 1,
                              child:  Text(loc.translate("logout", "msg"),style:getMediumStyle(
-                                 color: ColorsManager.black, fontSize: width/24)),
+                                 color: ColorsManager.black, fontSize: width/30)),
                             ),
                             Expanded(
                               flex: 3,
@@ -78,14 +78,14 @@ void Logout_bottocheet(@required BuildContext context,@required double height,@r
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                 children: [
-                                  materialbutton(height: height, width: width/3, colors: [
+                                  materialbutton(height: height, width: width/2.5, colors: [
                                     ColorsManager.burble.withOpacity(.2),
                                     ColorsManager.purble2.withOpacity(.2)
                                   ], text:loc.translate("logout", "cancel") , onpress: (){
                                     Get.back();
 
                                   }, textcolor:ColorsManager.burble),
-                                  materialbutton(height: height, width: width/3, colors: [
+                                  materialbutton(height: height, width: width/2.5, colors: [
                                     ColorsManager.burble,
                                     ColorsManager.purble2
                                   ], text:loc.translate("logout", "logout") , onpress: (){

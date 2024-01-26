@@ -8,16 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
+import '../../../../../core/utils/sizeconfig.dart';
 class ProfileSettingsView extends StatelessWidget {
    ProfileSettingsView({Key? key}) : super(key: key);
   profileSettingsCpntroller controller=Get.put(profileSettingsCpntroller());
+   var Width=Get.size.width<SizeConfig.tabletBreakPoint?Get.width:Get.width*.75;
 
-  @override
+
+   @override
   Widget build(BuildContext context) {
     var loc=AppLocalizations.of(context);
-    final size=MediaQuery.of(context).size;
-    final height=size.height;
-    final width=size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,17 +27,17 @@ class ProfileSettingsView extends StatelessWidget {
 
         Text(loc.translate("mainaccount", "screentitle"),style: TextStyle(
 
-            fontSize: width/18
+            fontSize: Width/18
         ),),
         actions: [
           Padding(
             padding:  EdgeInsets.only(
-              right: width/60,
+              right: Width/60,
             ),
           ),
         ],
         leading: Container(
-          padding: EdgeInsets.all(width/25),
+          padding: EdgeInsets.all(Width/25),
 
 
           child: SvgPicture.asset("assets/img/logo.svg"),),
@@ -44,7 +45,7 @@ class ProfileSettingsView extends StatelessWidget {
       body: SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width/30),
+          padding: EdgeInsets.symmetric(horizontal: Width/30),
           child: Column(
             children: [
               GetBuilder<profileSettingsCpntroller>(
@@ -55,7 +56,7 @@ class ProfileSettingsView extends StatelessWidget {
                   itemBuilder: (context,index)=>GestureDetector(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(width/30),
+                        borderRadius: BorderRadius.circular(Width/30),
                         gradient: LinearGradient(
                           colors: controller.BasicsItems[index].colors
                         )
@@ -65,11 +66,11 @@ class ProfileSettingsView extends StatelessWidget {
                         child: ListTile(
                           onTap:(){controller.BasicsItems[index].onpress();},
                           title: Text(controller.BasicsItems[index].title,overflow: TextOverflow.ellipsis,maxLines: 1,),
-                          titleTextStyle: getMediumStyle(color: controller.BasicsItems[index].textcolor, fontSize: width/27),
+                          titleTextStyle: getMediumStyle(color: controller.BasicsItems[index].textcolor, fontSize: Width/27),
                           trailing: controller.BasicsItems[index].traling,
                           leading: controller.BasicsItems[index].leading,
                           subtitle: Text(controller.BasicsItems[index].hint,overflow: TextOverflow.ellipsis,maxLines: 1,
-                          style: getLightStyle(color: controller.BasicsItems[index].textcolor, fontSize: width/35),
+                          style: getLightStyle(color: controller.BasicsItems[index].textcolor, fontSize: Width/35),
                           ),
 
                         ),
@@ -83,10 +84,10 @@ class ProfileSettingsView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: height/80),
                 child: Row(children: [
                   Text(AppLocalizations.of(context).translate("mainaccount", "genralitems"),
-                    style: getLightStyle(color: Colors.grey, fontSize: width/25),
+                    style: getLightStyle(color: Colors.grey, fontSize: Width/25),
 
                   ),
-                  SizedBox(width: width/100,),
+                  SizedBox(width: Width/100,),
                   Expanded(child: SizedBox(
                     height: height/750,
                     child: Container(
@@ -101,14 +102,14 @@ class ProfileSettingsView extends StatelessWidget {
                 itemCount: controller.Genralitems.length,
                 itemBuilder: (context,index)=>Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(width/30),
+                      borderRadius: BorderRadius.circular(Width/30),
                   ),
                   height: height/16,
                   child: Center(
                     child: ListTile(
                       onTap:(){controller.Genralitems[index].onpress();},
                       title: Text(controller.Genralitems[index].title,overflow: TextOverflow.ellipsis,maxLines: 1,),
-                      titleTextStyle: getMediumStyle(color: ColorsManager.black, fontSize: width/27),
+                      titleTextStyle: getMediumStyle(color: ColorsManager.black, fontSize: Width/27),
                       trailing: controller.Genralitems[index].traling,
                       leading: controller.Genralitems[index].leading,
 
@@ -121,10 +122,10 @@ class ProfileSettingsView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: height/160),
                 child: Row(children: [
                   Text(AppLocalizations.of(context).translate("mainaccount", "about"),
-                  style: getLightStyle(color: Colors.grey, fontSize: width/25),
+                  style: getLightStyle(color: Colors.grey, fontSize: Width/25),
 
                   ),
-                  SizedBox(width: width/100,),
+                  SizedBox(width: Width/100,),
                   Expanded(child: SizedBox(
                     height: height/750,
                     child: Container(
@@ -139,14 +140,14 @@ class ProfileSettingsView extends StatelessWidget {
                 itemCount: controller.Aboullistitems.length,
                 itemBuilder: (context,index)=>Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(width/27),
+                    borderRadius: BorderRadius.circular(Width/27),
                   ),
                   height: height/16,
                   child: Center(
                     child: ListTile(
                       onTap: ()=>controller.Aboullistitems[index].onpress(),
                       title: Text(controller.Aboullistitems[index].title,overflow: TextOverflow.ellipsis,maxLines: 1,),
-                      titleTextStyle: getMediumStyle(color: ColorsManager.black, fontSize: width/27),
+                      titleTextStyle: getMediumStyle(color: ColorsManager.black, fontSize: Width/27),
                       trailing: controller.Aboullistitems[index].traling,
                       leading: controller.Aboullistitems[index].leading,
 

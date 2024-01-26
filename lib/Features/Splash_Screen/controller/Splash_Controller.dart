@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:quickai/Features/Home_Screen/home/view/Home_Screen_view.dart';
+import 'package:quickai/Features/Home_Screen/home/presentation/view/home_layout_detect.dart';
 import 'package:quickai/Features/hello_page/view/hello_screen.dart';
 import 'package:quickai/Features/on_boarding/view/on_boarding_screen.dart';
 import 'package:quickai/core/constants.dart';
@@ -92,8 +92,7 @@ class Splash_controller extends GetxController{
                   }
                 }
                 if (dbuser.requestState == RequestState.success) {
-                  Get.off(() => Home_screen(), transition: kTransition2,
-                      duration: Duration(seconds: 1));
+                 Get.offAllNamed(HomepageLayout.scid);
 
                 }
                 else {

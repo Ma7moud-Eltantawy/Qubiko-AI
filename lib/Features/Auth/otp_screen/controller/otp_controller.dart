@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quickai/Features/Home_Screen/home/presentation/view/home_layout_detect.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/enums.dart';
 import 'package:quickai/data/Auth_Helper.dart';
 import 'package:quickai/data/chatgpt.dart';
 
 import '../../../../data/DB_Helper.dart';
-import '../../../Home_Screen/home/view/Home_Screen_view.dart';
 class OtpController extends GetxController {
   BaseAuthDataSource _authDataSource = AuthRemoteDataSource();
   final BaseDBhelperdatasource _dBhelperdatasource=RemoteDBhelperdatasource();
@@ -58,8 +58,7 @@ class OtpController extends GetxController {
       if(value.requestState==RequestState.success)
         {
 
-          Get.offAll(()=>Home_screen(),transition: kTransition2,duration: kTransitionDuration);
-
+          Get.offAllNamed(HomepageLayout.scid);
 
         }
         else{

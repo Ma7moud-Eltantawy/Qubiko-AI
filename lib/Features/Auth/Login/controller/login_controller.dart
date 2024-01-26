@@ -1,5 +1,5 @@
 import 'package:quickai/Features/Auth/profile_screen/view/profile_screen.dart';
-import 'package:quickai/Features/Home_Screen/home/view/Home_Screen_view.dart';
+import 'package:quickai/Features/Home_Screen/home/presentation/view/home_layout_detect.dart';
 import 'package:quickai/core/constants.dart';
 import 'package:quickai/core/enums.dart';
 import 'package:quickai/core/networking/request_result.dart';
@@ -9,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:quickai/data/DB_Helper.dart';
+
+import '../../../Home_Screen/home/presentation/view/Home_Screen_view.dart';
 
 class Login_controller extends GetxController{
   bool check_seen=true;
@@ -39,7 +41,7 @@ class Login_controller extends GetxController{
 
   Navigator()
   {
-    Get.offAll(()=>Home_screen(),transition: kTransition2,duration: kTransitionDuration);
+    Get.offAllNamed(HomepageLayout.scid);
   }
 
   Future login({required BuildContext ctx, required double height, required double width}) async {

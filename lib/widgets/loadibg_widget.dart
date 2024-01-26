@@ -29,8 +29,7 @@ class loadingwidget extends StatelessWidget {
         padding: EdgeInsets.all(width/20),
 
         child: Container(
-          height: height/8,
-          width: width/4,
+          padding: EdgeInsets.symmetric(horizontal: width/3),
           child: Opacity(
             opacity: .9,
             child: LoadingIndicator(

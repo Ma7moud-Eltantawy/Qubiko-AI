@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/utils/functions.dart';
+import '../../../../../core/utils/sizeconfig.dart';
 import '../../../../../data/Google_Ads.dart';
 
 
@@ -24,6 +25,7 @@ class CategoryItem {
 class Ai_Assistant_controller extends GetxController with GetSingleTickerProviderStateMixin {
   BaseAdsHelper ads=RemoteAdsHelper();
   static BuildContext ctx=Get.context!;
+
 
 
   Map<String, List<CategoryItem>>? usedItems;

@@ -46,7 +46,7 @@ class text_feild extends StatelessWidget {
               color: ColorsManager.red.withOpacity(.6),
               fontWeight: FontWeight.w600
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: width/16),
+          contentPadding: EdgeInsets.symmetric(horizontal: width/16,vertical: heigh/60),
 
           filled: true,
           fillColor: Colors.grey[100], // Gray background color
@@ -136,7 +136,7 @@ class datepickerfield extends StatelessWidget {
             color: ColorsManager.red.withOpacity(.6),
             fontWeight: FontWeight.w600,
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: width / 16),
+          contentPadding: EdgeInsets.symmetric(horizontal: width / 16,vertical: heigh/60),
           filled: true,
           fillColor: Colors.grey[100], // Gray background color
           enabledBorder: OutlineInputBorder(

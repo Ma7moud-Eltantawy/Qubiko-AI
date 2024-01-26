@@ -17,14 +17,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/utils/sizeconfig.dart';
+
 class History_Screen extends StatelessWidget {
   const History_Screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    var width = size.width;
-    var height = size.height;
+    var Width=Get.size.width<SizeConfig.tabletBreakPoint?Get.width:Get.width*.75;
     HistoryController controller = Get.put(HistoryController());
     var loc=AppLocalizations.of(context);
 
@@ -47,7 +47,7 @@ class History_Screen extends StatelessWidget {
           ),
         ],
         leading: Container(
-          padding: EdgeInsets.all(width / 25),
+          padding: EdgeInsets.all(Width / 25),
           child: SvgPicture.asset("assets/img/logo.svg"),
         ),
       ),
@@ -55,7 +55,7 @@ class History_Screen extends StatelessWidget {
         future: controller.getData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState==ConnectionState.waiting) {
-            return Center(child: loadingwidget(height: height, width: width));
+            return Center(child: loadingwidget(height: height, width: Width));
           }
 
           else{
@@ -68,7 +68,7 @@ class History_Screen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SvgPicture.asset("assets/img/empty_history.svg"),
-                Text(loc.translate("historysc", "emptyhint"),style: getMediumStyle(color: Colors.black54, fontSize: width/25),),
+                Text(loc.translate("historysc", "emptyhint"),style: getMediumStyle(color: Colors.black54, fontSize: Width/25),),
 
 
               ],
@@ -116,7 +116,7 @@ class History_Screen extends StatelessWidget {
                           ),
 
                           child: Histoty_item_model(
-                              width: width, height: height, data: data),
+                              width: Width, height: height, data: data),
                         ),
                       );
                     } else {
@@ -126,7 +126,7 @@ class History_Screen extends StatelessWidget {
                             padding:
                             EdgeInsets.symmetric(vertical: height / 20),
                             child: loadingwidget(
-                                height: height / 3, width: width / 2.5),
+                                height: height / 3, width: Width / 2.5),
                           ),
                         );
                       } else {
